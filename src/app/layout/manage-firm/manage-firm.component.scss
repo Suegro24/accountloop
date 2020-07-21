@@ -1,0 +1,117 @@
+.firm-manage-container {
+
+    width: 40%;
+    margin:0 auto 100px auto;
+
+    .main-title {
+        margin:10px 0 30px 0;
+        text-align: center;
+        font-size: 24px;
+    }
+
+    .firm-section {
+
+        border: 1px solid black;
+        border-radius: 10px;
+        padding: 10px;
+        margin-top: 30px;
+        position: relative;
+
+        .edit-button {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            font-size: 12px;
+            color: gray;
+            margin: 0;
+            cursor: pointer;
+        }
+
+        &:first-child{
+            margin-top:0;
+        }
+
+        p {
+            margin:0;
+        }
+    
+        .title {
+            text-align: center;
+        }
+    
+        .label {
+            font-size: 12px;
+            color: gray;
+        }
+    
+        .item {
+            font-size: 14px;
+            margin-left: 10px;
+        }
+
+        .attempting-users {
+            
+            .attempting-users-item {
+                position: relative;
+
+                .button-container {
+                    position: absolute;
+                    right: 0;
+
+                    button {
+                        margin-right: 10px;
+
+                        &:last-child {
+                            margin-right: 0;
+                        }
+                    }
+                }
+            }
+        }
+
+        .attempting-budget-changes {
+            
+            mat-list-item {
+                position: relative;
+                padding: 10px;
+
+                .align-right {
+                    position: absolute;
+                    right: 70px;
+                }
+
+                .button-container {
+                    position: absolute;
+                    right: 0px;
+                    display: flex;
+                    flex-direction: column;
+                    top:-7px;
+
+                    button {
+                        margin-bottom: 2px;
+
+                        &:last-child {
+                            margin-bottom: 0;
+                        }
+                    }
+                }
+            }
+        }
+
+        .users-manage {
+            margin-top: 10px;
+
+            mat-card-actions {
+                text-align: right;
+            }
+        }
+
+    }
+
+    .delete {
+
+        text-align: center;
+        
+    }
+}
+

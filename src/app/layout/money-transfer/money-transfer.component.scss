@@ -1,0 +1,64 @@
+@import '../../../assets/colors.scss';
+
+.money-transfer-container {
+    width:calc(100%-200px);
+    margin-left: 200px;
+    background: $background;
+    min-height: 100vh;
+
+    .transfer-user-container {
+        margin-top: 30px;
+        text-align:center;
+
+        .list {
+            width: 30%;
+            background-color: white;
+            margin: 0 auto;
+            padding:2px;
+            
+
+            .list-item {
+                justify-content: center;
+                position: relative;
+
+                p {
+                    margin:0;
+                }
+
+                button {
+                    position:absolute;
+                    right: 10px;
+                    top:50%;
+                    transform: translateY(-50%);
+                }
+            }
+        }
+    }
+
+    .awaiting-payments-container {
+        width: 60%;
+        margin: 20px auto 0 auto;
+
+        mat-card-actions {
+            button {
+                margin: 0 0 0 5px;
+            }
+        }
+    }
+
+    
+    .button-accept {
+        background-color: $success;
+        color:white;
+    }
+
+    .button-discard {
+        background-color: $warn;
+        color:white;
+    }
+
+    .button-disable-user {
+        background-color: black;
+        color:white;
+    }
+}

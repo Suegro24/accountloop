@@ -1,0 +1,52 @@
+<app-header></app-header>
+<app-sidenav></app-sidenav>
+<div class="profile-container">
+    <div class="profile-photo">
+        <img [src]="user.photo ? user.photo : '../../../assets/images/profile-default.png'" alt="profile">
+        <div class="profile-photo-settings">
+            <div class="settings-item">
+                <mat-icon>add_a_photo</mat-icon>
+                <label> Dodaj zdjęcie <input #profilePhoto type="file" accepr="image/*" placeholder="Dodaj zdjęcie" (change)="addUserPhoto(profilePhoto)" style="display: none;"> </label>
+            </div>
+        </div>
+    </div>
+    <div class="profile-informations-container">
+        <div class="informations-header">
+            <h2 class="title">Informacje</h2>
+            <p class="edit-button" (click)="editProfile()" >Edytuj</p>
+        </div>
+        <div class="information-item">
+            <p class="label">Imię</p>
+            <p class="item"> {{user?.name}} </p>
+        </div>
+        <div class="information-item">
+            <p class="label">Nazwisko</p>
+            <p class="item"> {{user?.surname}} </p>
+        </div>
+        <div class="information-item">
+            <p class="label">Data urodzenia</p>
+            <p class="item"> {{user?.dateOfBirth | date:'dd/MM/yyyy'}} </p>
+        </div>
+        <div class="information-item">
+            <p class="label">Email</p>
+            <p class="item"> {{user?.email}} </p>
+        </div>
+        <div class="information-item">
+            <p class="label">Numer telefonu</p>
+            <p class="item"> (+48){{user?.phone}} </p>
+        </div>
+        <div class="information-item">
+            <p class="label">Płeć</p>
+            <p class="item"> {{user?.sex=='man' ? 'Mężczyzna' : 'Kobieta'}} </p>
+        </div>
+        <div class="information-item">
+            <p class="label">Stanowisko</p>
+            <p class="item"> {{user?.position?.name || 'Brak stanowiska'}}{{user?.position?.earnings ? ', wynagrodzenie: ' + user.position.earnings + 'zł' : ''}} </p>
+        </div>
+        <div class="information-item">
+            <p class="label">Opis</p>
+            <p class="item"> {{user?.description || 'Brak opisu'}} </p>
+        </div>
+    </div>
+</div>
+<app-footer></app-footer>

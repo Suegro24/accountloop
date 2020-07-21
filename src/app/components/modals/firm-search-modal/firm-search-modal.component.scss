@@ -1,0 +1,22 @@
+@import '../../../../assets/colors.scss';
+
+.firm-search-container {
+    width: 40vw;
+
+    .title {
+        text-align: center;
+    }
+
+    .firm-search {
+        mat-list-item {
+            p {
+                margin: 4px 0 0 5px;
+            }
+        }
+
+        .join-firm-button {
+            margin-left: auto;
+            background-color: $success;
+        }
+    }
+}

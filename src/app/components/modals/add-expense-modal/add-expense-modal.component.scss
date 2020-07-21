@@ -1,0 +1,13 @@
+.expense-form {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+
+    .title {
+        text-align: center;
+    }
+
+    .form-group {
+        margin-top: 20px;
+    }
+}

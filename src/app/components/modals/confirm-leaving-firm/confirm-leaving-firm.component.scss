@@ -1,0 +1,18 @@
+@import '../../../../assets/colors.scss';
+
+.confirm-leaving-container {
+    max-width: 500px;
+    
+    .title {
+        color: $warn;
+        text-align: center;
+    }
+
+    p {
+        font-size: 16px;
+    }
+
+    .button-container {
+        text-align: right;
+    }
+}

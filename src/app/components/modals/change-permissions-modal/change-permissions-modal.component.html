@@ -1,0 +1,21 @@
+<div class="change-permissions-container">
+    <form id="ChangePermissionsForm" class="change-permissions-form" #ChangePermissionsForm="ngForm">
+
+        <h2 class="title">Zmień uprawnienia użytkownika {{changePermissionsModel.name}} {{changePermissionsModel.surname}} </h2>
+
+        <mat-form-field class="form-group">
+            <mat-label>Uprawnienia</mat-label>
+            <mat-select class="select" name="permissions" [(ngModel)]="permissions" required>
+                <mat-option *ngIf="user?.firmStatus >= 3" value=3>Właściciel</mat-option>
+                <mat-option *ngIf="user?.firmStatus >= 2" value=2>Kierownik</mat-option>
+                <mat-option value=1>Pracownik</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <div class="button-container">
+            <button mat-raised-button type="button" class="button--success" [mat-dialog-close]="true" [disabled]="ChangePermissionsForm.form.invalid" (click)="changePermissions()">Zmień</button>
+            <button mat-raised-button type="button" class="button--delete" [mat-dialog-close]="true">Zamknij</button>
+        </div>
+    
+    </form>
+</div>

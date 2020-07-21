@@ -1,0 +1,20 @@
+@import '../../../assets/colors.scss';
+
+.container {
+    background-color: $background;
+    min-height: 100vh;
+    width: calc(100% - 200px);
+    margin-left:200px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 100px 100px;
+    justify-items: center;
+    padding-top: 50px;
+
+    app-sidenav {
+        position: fixed;
+        left:0;
+        top:0;
+        z-index: 10;
+    }
+}

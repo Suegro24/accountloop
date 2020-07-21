@@ -1,0 +1,13 @@
+@import '../../../assets/colors.scss';
+
+.container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 100px 100px;
+    justify-content: center;
+    width: calc(100%-200px);
+    margin-left: 200px;
+    background-color: $background;
+    min-height: 100vh;
+    padding: 50px;
+}

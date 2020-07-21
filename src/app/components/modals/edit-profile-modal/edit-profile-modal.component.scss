@@ -1,0 +1,18 @@
+.profile-form {
+    display: grid;
+    width: 500px;
+
+    .title {
+        text-align: center;
+    }
+
+    .grid--container {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+
+    .form-group {
+        margin-top: 20px;
+    }
+}

@@ -1,0 +1,69 @@
+<mat-sidenav-container>
+    <mat-sidenav #drawer [ngClass]="{hidden: !(isHandset | async)!.matches}" fixedInViewport="false" 
+    [attr.role]="isHandset ? 'dialog' : 'navigation'" [mode]="(isHandset | async)!.matches ? 'over' : 'side'"
+    [opened]="!(isHandset | async)!.matches">
+        <mat-nav-list>
+            <div class="sidemenu--title" routerLink="/przeglad"><img class="logo" src="../../../assets/images/logo.png" alt="logo"></div>
+
+            <mat-divider></mat-divider>
+
+            <a class="list-item" mat-list-item routerLink="/przeglad">
+                <mat-icon>person</mat-icon>
+                <p class="list-item--text">Przegląd</p>
+            </a>
+            <a class="list-item" mat-list-item routerLink="/uzytkownik-wykresy">
+                <mat-icon>show_chart</mat-icon>
+                <p class="list-item--text">Wykresy</p>
+            </a>
+            <a class="list-item" mat-list-item routerLink="/konto">
+                <mat-icon>account_balance</mat-icon>
+                <p class="list-item--text">Konto</p>
+            </a>
+            <a class="list-item" mat-list-item routerLink="/przelew">
+                <mat-icon>payment</mat-icon>
+                <p class="list-item--text" [matBadge]="moneyTransferBadge" [matBadgeHidden]="moneyTransferBadge==0" matBadgeSize="small" matBadgeOverlap="false">Przelew</p>
+            </a>
+
+            <mat-divider></mat-divider>
+
+            <a class="list-item" mat-list-item routerLink="/firma">
+                <mat-icon>business</mat-icon>
+                <p class="list-item--text">Firma</p>
+            </a>
+            <span *ngIf="user.firmId" >
+                <a class="list-item" mat-list-item routerLink="/wykresy-firma">
+                    <mat-icon>bar_chart</mat-icon>
+                    <p class="list-item--text">Wykresy</p>
+                </a>
+                <a class="list-item" mat-list-item routerLink="/czat">
+                    <mat-icon>chat</mat-icon>
+                    <p class="list-item--text">Czat</p>
+                </a>
+                <a class="list-item" mat-list-item routerLink="/zarzadzaj-firma">
+                    <mat-icon>build</mat-icon>
+                    <p class="list-item--text">Zarządzaj firmą</p>
+                </a>
+            </span>
+            <mat-divider></mat-divider>
+
+            <a class="list-item" mat-list-item routerLink="/ustawienia">
+                <mat-icon>settings</mat-icon>
+                <p class="list-item--text">Ustawienia</p>
+            </a>
+
+            <a class="list-item" mat-list-item routerLink="/pomoc">
+                <mat-icon>help</mat-icon>
+                <p class="list-item--text">Pomoc</p>
+            </a>
+
+        </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <mat-toolbar>
+            <button mat-flat-button type="button" aria-label="Toggle sidenav" (click)="drawer.toggle()" *ngIf="(isHandset | async)!.matches">
+                <mat-icon>keyboard_arrow_right</mat-icon>
+            </button>
+        </mat-toolbar>
+        <router-outlet></router-outlet>
+    </mat-sidenav-content>
+</mat-sidenav-container>

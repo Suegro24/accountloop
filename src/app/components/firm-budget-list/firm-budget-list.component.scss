@@ -1,0 +1,55 @@
+@import '../../../assets/colors.scss';
+
+.firm-budget-container {
+
+    background-color: white;
+    box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.75);
+
+    .no-account-changes {
+        padding: 10px;
+        text-align: center;
+        font-size: 16px;
+    }
+
+    .firm-budget-balance {
+        width: 50%;
+        min-width: 500px;
+        margin: 0 auto;
+        text-align: center;
+        font-size: 20px;
+        border: 1px solid transparent;
+        padding: 10px 0 0 0;
+    }
+
+    .button-container {
+
+        position:fixed;
+        bottom: 100px;
+        right: 100px;
+        z-index: 2;
+
+        .button-income {
+            background-color: $success;
+            color: $font-dark;
+            margin-right: 20px;
+        }
+
+        .button-expense {
+            background-color: $warn;
+            color: $font-dark;
+        }
+    }
+
+    .budget-changes-list {    
+        
+        mat-list-item {
+            position: relative;
+
+            .align-right {
+                position: absolute;
+                right: 10px;
+            }
+        }
+    }
+
+}

@@ -1,0 +1,71 @@
+@import '../../../assets/colors.scss';
+
+mat-sidenav-container {
+    height: 100vh;
+    position:fixed;
+    top:0;
+    left:0;
+    z-index: 10 !important;
+
+    mat-sidenav {
+        width: 200px;
+        box-shadow: 2px 0px 13px -1px #000000bf;
+
+        .sidemenu--title {
+            text-align: center;
+            margin-top:-8px;
+            height: 60px;
+            width: 200px;
+            max-width: 100%;
+            font-weight: 600;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+
+            .logo {
+                width: 100px;
+               
+            }
+        }
+
+        mat-nav-list {
+            .list-item {
+
+                mat-icon {
+                    color:$font-gray;
+                }
+                
+                .list-item--text {
+                    margin:0;
+                    padding-left: 10px;
+                    color:$font-gray;
+                    font-size: 14px;
+                }
+            }
+        }
+        
+    }
+
+    mat-sidenav-content {
+        
+        mat-toolbar {
+            position:fixed;
+            width: 0;
+            top: 50%;
+            transform: translate(-50%,-50%);
+            background-color: transparent;
+
+            button {
+                background:$primary;
+                min-width: 10px;
+                height: 50px;
+                border-radius: 0;
+                display: flex;
+                justify-content: center;
+
+            }
+        }
+    }
+}

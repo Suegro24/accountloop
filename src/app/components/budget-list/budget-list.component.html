@@ -1,0 +1,25 @@
+<div class="budget-container">
+    <div class="budget-balance">
+        <p>Stan konta: {{(user?.budget?.money || 0) | currency:' '}}zł </p>
+    </div>
+
+    <div class="no-account-changes" *ngIf="accountChangesContainer?.length == 0">
+        <p>Brak danych</p>
+    </div>
+    <mat-list *ngFor="let accountChange of accountChangesContainer" class="budget-changes-list">
+        <div *ngIf="accountChange.status != 'Waiting' || accountChange.type == 'expense'">
+            <mat-divider></mat-divider>
+            <mat-list-item>
+                <mat-icon mat-list-icon>credit_card</mat-icon>
+                <div mat-line> {{accountChange.name}} <span class="align-right" [class]="accountChange.type=='income' ? 'income': 'expense'">{{accountChange.money | currency: ' '}}zł</span>  </div>
+                <div mat-line> {{accountChange.typeName}} <span class="align-right">{{accountChange.date | date:'dd.MM.yyyy'}}</span> </div>
+            </mat-list-item>
+        </div>
+    </mat-list>
+
+    <div class="button-container">
+        <button mat-fab class="button-income" (click)="addIncome()"><mat-icon>add</mat-icon></button>
+        <button mat-fab class="button-expense" (click)="addExpense()"><mat-icon>remove</mat-icon></button>
+    </div>
+    
+</div>

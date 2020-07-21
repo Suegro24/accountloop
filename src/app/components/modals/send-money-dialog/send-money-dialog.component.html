@@ -1,0 +1,32 @@
+<form class="send-money-form" #SendMoneyForm="ngForm">
+    <h2 class="title">Przelew</h2>
+
+    <mat-form-field class="form-group">
+        <mat-label>Tytuł</mat-label>
+        <input matInput class="form-control" type="text" name="name" [(ngModel)]="paymentModel.name" #name="ngModel" required>
+        <!-- <div *ngIf="name.errors && name.touched">
+            <p class="text--warn" *ngIf="name.errors.required">Imie jest wymagane</p>
+            <p class="text--warn" *ngIf="name.errors.pattern">Imie nie może mieć więcej niż 20 znaków</p>
+        </div> -->
+    </mat-form-field>
+
+    <mat-form-field class="form-group">
+        <mat-label>Ilość pieniędzy</mat-label>
+        <input matInput class="form-control" type="number" min="0" name="money" [(ngModel)]="paymentModel.money" #money="ngModel" required>
+        <!-- <div *ngIf="name.errors && name.touched">
+            <p class="text--warn" *ngIf="name.errors.required">Imie jest wymagane</p>
+            <p class="text--warn" *ngIf="name.errors.pattern">Imie nie może mieć więcej niż 20 znaków</p>
+        </div> -->
+    </mat-form-field>
+
+    <mat-form-field class="form-group">
+        <mat-label>Wiadomość</mat-label>
+        <textarea matInput class="form-control" name="message" [(ngModel)]="paymentModel.message" #money="ngModel"></textarea>
+        <!-- <div *ngIf="name.errors && name.touched">
+            <p class="text--warn" *ngIf="name.errors.required">Imie jest wymagane</p>
+            <p class="text--warn" *ngIf="name.errors.pattern">Imie nie może mieć więcej niż 20 znaków</p>
+        </div> -->
+    </mat-form-field>
+    <button mat-button class="btn-success" type="button" mat-dialog-close [disabled]="SendMoneyForm.form.invalid" (click)="sendPayment()">Wykonaj</button>
+    
+</form>

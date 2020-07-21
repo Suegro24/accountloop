@@ -1,0 +1,73 @@
+<form class="profile-form" #profileForm="ngForm">
+    <h2 class="title">Edytuj profil</h2>
+
+    <div class="grid--container">
+        <mat-form-field class="form-group">
+            <mat-label>Imie</mat-label>
+            <input matInput class="form-control" type="text" name="name" [(ngModel)]="profileModel.name" #name="ngModel" pattern=".{1,20}" placeholder="Podaj swoję imie..." required>
+            <!-- <div *ngIf="name.errors && name.touched">
+                <p class="text--warn" *ngIf="name.errors.required">Imie jest wymagane</p>
+                <p class="text--warn" *ngIf="name.errors.pattern">Imie nie może mieć więcej niż 20 znaków</p>
+            </div> -->
+        </mat-form-field>
+
+        <mat-form-field class="form-group">
+            <mat-label>Nazwisko</mat-label>
+            <input matInput class="form-control" type="text" [class.input--warn]="surname.invalid && surname.touched" placeholder="nazwisko" name="surname" 
+            [(ngModel)]="profileModel.surname" #surname="ngModel" pattern=".{1,20}" required>
+            <!-- <div *ngIf="surname.errors && surname.touched">
+                <p class="text--warn" *ngIf="surname.errors.required">Nazwisko jest wymagane</p>
+                <p class="text--warn" *ngIf="surname.errors.pattern">Nazwisko nie może mieć więcej niż 20 znaków</p>
+            </div> -->
+        </mat-form-field>
+
+        <mat-form-field class="form-group">
+            <mat-label>Email</mat-label>
+            <input matInput class="form-control" type="email" [class.input--warn]="email.invalid && email.touched" placeholder="email" name="email" 
+            [(ngModel)]="profileModel.email" #email="ngModel" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required>
+            <!-- <div *ngIf="email.errors && email.touched">
+                <p class="text--warn" *ngIf="email.errors.required">Email jest wymagany</p>
+                <p class="text--warn" *ngIf="email.errors.pattern">Nieprawidłowy adres email</p>
+            </div> -->
+        </mat-form-field>
+
+        <mat-form-field class="form-group">
+            <mat-label>Numer telefonu</mat-label>
+            <input matInput class="form-control" type="text" [class.input--warn]="phone.invalid && phone.touched" placeholder="numer telefonu" name="phone" 
+            [(ngModel)]="profileModel.phone" #phone="ngModel" pattern="\d{9}">
+            <!-- <div *ngIf="phone.errors && phone.touched">
+                <p class="text--warn" *ngIf="phone.errors.pattern">Numer telefonu musi składać się z 9 cyfr</p>
+            </div> -->
+        </mat-form-field>
+
+        <mat-form-field class="form-group">
+            <mat-label>Data urodzenia</mat-label>
+            <input matInput type="date" class="form-control" name="dateOfBirth" [(ngModel)]="profileModel.dateOfBirth" #dateOfBirth="ngModel" value="01.01.2000">
+        </mat-form-field>
+
+        <mat-form-field class="form-group">
+            <mat-label>Płeć</mat-label>
+            <mat-select class="select" name="sex" [(ngModel)]="profileModel.sex" required>
+                <mat-option value="man"> Mężczyzna </mat-option>
+                <mat-option value="woman"> Kobieta </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="form-group">
+            <mat-label>Stanowisko</mat-label>
+            <input matInput type="input" class="form-control" name="positionName" [(ngModel)]="profileModel.position.name" #positionName="ngModel">
+        </mat-form-field>
+
+        <mat-form-field class="form-group">
+            <mat-label>Wynagrodzenie</mat-label>
+            <input matInput type="number" class="form-control" name="positionEarnings" [(ngModel)]="profileModel.position.earnings" #positionEarnings="ngModel">
+        </mat-form-field>
+
+        <mat-form-field class="form-group">
+            <mat-label>Opis</mat-label>
+            <textarea matInput placeholder="Dodaj swój opis..." name="description" [(ngModel)]="profileModel.description" #description="ngModel"></textarea>
+        </mat-form-field>
+    </div>
+    <button mat-button class="btn-success" type="button" mat-dialog-close [disabled]="profileForm.form.invalid" (click)="editProfile()">Zaktualizuj profil</button>
+</form>
+

@@ -1,0 +1,104 @@
+<app-header></app-header>
+
+<div class="firm-manage-container">
+    <app-sidenav></app-sidenav>
+    
+    <h2 class="main-title">Ustawienia</h2>
+
+    <div class="firm-section">
+        <h2 class="title">Dane firmy</h2>
+        <p *ngIf="user.firmStatus == 3" class="edit-button" (click)="editFirmData()" routerLink="/zarzadzaj-firma">Edytuj</p>
+
+        <div class="firm-informations-item">
+            <p class="label">Nazwa</p>
+            <p class="item"> {{firm?.name}} </p>
+        </div>
+        <div class="firm-informations-item">
+            <p class="label">Państwo</p>
+            <p class="item"> {{firm?.address.country}} </p>
+        </div>
+        <div class="firm-informations-item">
+            <p class="label">Miasto</p>
+            <p class="item"> {{firm?.address.city}} </p>
+        </div>
+        <div class="firm-informations-item">
+            <p class="label">Ulica</p>
+            <p class="item"> {{firm?.address.street}} </p>
+        </div>
+    </div>
+
+    <div class="firm-section" *ngIf="user?.firmStatus > 1">
+        <h2 class="title">Prośby o dołączenie</h2>
+        <!-- <div class="no-attempting">
+            <p>Brak próśb o dołączenie</p>
+        </div> -->
+        <mat-list class="attempting-users" *ngFor="let user of firm?.users">
+            <mat-list-item class="attempting-users-item" *ngIf="user.firmStatus == 0" > 
+                <p>{{user?.name}} {{user?.surname}}</p> 
+                <div class="button-container">
+                    <button mat-raised-button class="button--success" type="button" (click)="acceptUser(user._id)"><mat-icon>add</mat-icon></button>
+                    <button mat-raised-button class="button--delete" type="button" (click)="discardUser(user._id)"><mat-icon>delete</mat-icon></button>
+                </div>
+            </mat-list-item>
+        </mat-list>
+    </div>
+
+    <div class="firm-section" *ngIf="user?.firmStatus > 1">
+        <h2 class="title">Prośby o dodanie wpłaty/wydatku</h2>
+        <!-- <div class="no-attempting">
+            <p>Brak próśb o dołączenie</p>
+        </div> -->
+        <mat-list class="attempting-budget-changes" *ngFor="let accountChange of accountChangesContainer">
+            <mat-list-item class="attempting-budget-changes-item" *ngIf="accountChange.status == 'Waiting'">
+                <mat-icon mat-list-icon>credit_card</mat-icon>
+                <div mat-line> {{accountChange.name}} 
+                    <span class="align-right" [class]="accountChange.type=='income' ? 'income': 'expense'">{{accountChange.money | currency: ' '}}zł</span>  
+                </div>
+                <div mat-line> {{accountChange.typeName}} 
+                    <span class="align-right">{{accountChange.date | date:'dd.MM.yyyy'}}</span> 
+                </div>
+                <div class="button-container">
+                    <button type="button" mat-raised-button class="button--success" (click)="acceptBudgetChange(accountChange._id)"><mat-icon>add</mat-icon></button>
+                    <button type="button" mat-raised-button class="button--delete" (click)="discardBudgetChange(accountChange._id)"><mat-icon>delete</mat-icon></button>
+                </div>
+                <mat-divider></mat-divider>
+            </mat-list-item>
+        </mat-list>
+    </div>
+
+    <div class="firm-section" *ngIf="user?.firmStatus > 1">
+        <h2 class="title">Zarządzaj pracownikami</h2>
+        <!-- <div class="no-attempting">
+            <p>Brak próśb o dołączenie</p>
+        </div> -->
+
+        <div *ngFor="let employee of firm?.users">
+            <mat-card class="users-manage" *ngIf="employee.firmStatus <= user?.firmStatus && employee.firmStatus > 0">
+                <mat-card-header>
+                    <mat-card-title> {{employee.name}} {{employee.surname}} </mat-card-title>
+                    <mat-card-subtitle> {{employee.firmStatus == 1 ? 'Pracownik' : employee.firmStatus == 2 ? 'Kierownik' : 'Właściciel'}} 
+                    </mat-card-subtitle>
+                </mat-card-header>
+                <mat-card-actions>
+                    <button mat-button class="button--gold" (click)="changePermissions(employee._id)">Uprawnienia</button>
+                    <button *ngIf="employee._id != user._id" mat-button class="button--delete" (click)="deleteEmployee(employee._id)">Usuń</button>
+                </mat-card-actions>
+            </mat-card>
+        </div>
+    </div>
+
+    <div class="firm-section danger delete">
+        <h2 class="title">Opuść firme</h2>
+        <button mat-button class="button--delete" (click)="leaveFirm()">Opuść firmę</button>
+    </div>
+    
+    <div class="firm-section danger delete" *ngIf="user?.firmStatus > 1">
+        <h2 class="title">Usuń firme</h2>
+        <button mat-button class="button--delete" (click)="deleteFirm()">Usuń firmę</button>
+    </div>
+
+    
+</div>
+
+
+<app-footer></app-footer>

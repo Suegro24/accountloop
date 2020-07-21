@@ -1,0 +1,7 @@
+<div class="users-list-container">
+    <h2 class="title">Lista pracowników</h2>
+    <mat-divider></mat-divider>
+    <mat-list *ngFor="let user of users">
+        <mat-list-item *ngIf="user.firmStatus > 0" > {{user?.name}} {{user?.surname}} </mat-list-item>
+    </mat-list>
+</div>

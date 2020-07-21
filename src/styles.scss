@@ -1,1 +1,61 @@
+@import '~@angular/material/theming';
+@include mat-core();
+@import 'assets/colors.scss';
+
+$inzynierka-primary: mat-palette($mat-indigo);
+$inzynierka-accent: mat-palette($mat-pink, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$inzynierka-warn: mat-palette($mat-red);
+
+// Create the theme object (a Sass map containing all of the palettes).
+$inzynierka-theme: mat-light-theme($inzynierka-primary, $inzynierka-accent, $inzynierka-warn);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($inzynierka-theme);
+
 /* You can add global styles to this file, and also import other style files */
+
+html, body { 
+    height: 100%; 
+}
+body { 
+    font-family: Roboto, "Helvetica Neue", sans-serif; 
+}
+
+* {
+    margin:0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+a {
+    color: $font-dark;
+    text-decoration: none;
+}
+
+.button--success {
+    background-color: $success;
+}
+
+.button--gold {
+    background-color: gold;
+}
+
+.button--delete {
+    background-color: $warn;
+}
+
+.income {
+    color: $success;
+}
+
+.expense {
+    color: $warn;
+}
+
+.danger {
+    border: 2px solid $warn !important;
+}

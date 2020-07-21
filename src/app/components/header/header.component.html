@@ -1,0 +1,10 @@
+<header>
+    <!-- <img class="logo" src="#" alt="logo"> -->
+    <nav class="nav">
+        <ul class="nav-list">
+            <li class="nav-item">  </li>
+            <li class="nav-item" routerLink="/profil"> {{user?.name | titlecase}} </li>
+            <li class="nav-item" (click)="logout()">Wyloguj się</li>
+        </ul>
+    </nav>
+</header>

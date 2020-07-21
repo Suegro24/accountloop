@@ -1,0 +1,56 @@
+<app-header></app-header>
+<app-sidenav></app-sidenav>
+
+    <mat-tab-group mat-align-tabs="center" class="money-transfer-container">
+        <mat-tab label="Przelew do użytkownika">
+            <div class="transfer-user-container">
+                <mat-form-field>
+                    <mat-label>Wyszukaj użytkownika</mat-label>
+                    <input matInput type="text" [(ngModel)]="searchedUser" autocomplete="off">
+                </mat-form-field>
+    
+                <mat-list role="list" class="list" *ngFor="let user of users | moneyTransferPipe:searchedUser:'users'">
+                    <mat-list-item role="listitem" class="list-item">
+                        <p>{{user.name}} {{user.surname}}</p>
+                        <button mat-button class="send-button" (click)="sendMoney(user, 'user')"><mat-icon>payment</mat-icon></button>
+                    </mat-list-item>
+                    <mat-divider></mat-divider>
+                </mat-list>
+            </div>
+        </mat-tab>
+        <mat-tab label="Przelew do firmy">
+            <div class="transfer-user-container">
+                <mat-form-field>
+                    <mat-label>Wyszukaj firme</mat-label>
+                    <input matInput type="text" [(ngModel)]="searchedFirm" autocomplete="off">
+                </mat-form-field>
+
+                <mat-list role="list" class="list" *ngFor="let firm of firms | moneyTransferPipe:searchedFirm:'firms'">
+                    <mat-list-item role="listitem" class="list-item">
+                        <p>{{firm.name}}</p>
+                        <button mat-button class="send-button" (click)="sendMoney(firm, 'firm')"><mat-icon>payment</mat-icon></button>
+                    </mat-list-item>
+                    <mat-divider></mat-divider>
+                </mat-list>
+            </div>
+        </mat-tab>
+        <mat-tab label="Oczekujące przelewy">
+            <mat-card *ngFor="let payment of awaitingPayments" class="awaiting-payments-container">
+                <mat-card-header>
+                    <img mat-card-avatar class="header-image" [src]="payment.senderImage ? payment.senderImage : '../../../assets/images/profile-default.png'" alt="profile-picture">
+                    <mat-card-title> {{payment?.sender}} - {{payment?.name}} </mat-card-title>
+                    <mat-card-subtitle> {{payment?.date | date:'dd.MM.yyyy'}} - {{payment?.money | currency:' '}}zł </mat-card-subtitle>
+                </mat-card-header>
+                <mat-card-content>
+                    <p> {{payment?.message || 'Brak wiadomości'}} </p>
+                </mat-card-content>
+                <mat-card-actions align="end">
+                    <button mat-button type="button" class="button-accept" (click)="acceptMoney(payment)"><mat-icon>done</mat-icon></button>
+                    <button mat-button type="button" class="button-discard" (click)="discardMoney(payment)"><mat-icon>clear</mat-icon></button>
+                    <button mat-button type="button" matTooltip="Zablokuj użytkownika" matTooltipPosition="below" class="button-disable-user" (click)="disableUser(payment)"><mat-icon>block</mat-icon></button>
+                </mat-card-actions>
+            </mat-card>
+        </mat-tab>
+    </mat-tab-group>
+
+<app-footer></app-footer>

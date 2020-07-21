@@ -1,0 +1,41 @@
+<form class="firm-form" #firmForm="ngForm">
+    <h2 class="title">Edytuj dane firmy</h2>
+
+    <mat-form-field class="form-group">
+        <mat-label>Nazwa</mat-label>
+        <input matInput class="form-control" type="text" name="name" [(ngModel)]="firmModel.name" #name="ngModel" pattern=".{1,20}" required>
+        <!-- <div *ngIf="name.errors && name.touched">
+            <p class="text--warn" *ngIf="name.errors.required">Imie jest wymagane</p>
+            <p class="text--warn" *ngIf="name.errors.pattern">Imie nie może mieć więcej niż 20 znaków</p>
+        </div> -->
+    </mat-form-field>
+
+    <mat-form-field class="form-group">
+        <mat-label>Państwo</mat-label>
+        <input matInput class="form-control" type="text" name="country" [(ngModel)]="firmModel.address.country" #country="ngModel" pattern=".{1,20}" required>
+        <!-- <div *ngIf="surname.errors && surname.touched">
+            <p class="text--warn" *ngIf="surname.errors.required">Nazwisko jest wymagane</p>
+            <p class="text--warn" *ngIf="surname.errors.pattern">Nazwisko nie może mieć więcej niż 20 znaków</p>
+        </div> -->
+    </mat-form-field>
+
+    <mat-form-field class="form-group">
+        <mat-label>Miasto</mat-label>
+        <input matInput class="form-control" type="text" name="city" [(ngModel)]="firmModel.address.city" #city="ngModel" required>
+        <!-- <div *ngIf="email.errors && email.touched">
+            <p class="text--warn" *ngIf="email.errors.required">Email jest wymagany</p>
+            <p class="text--warn" *ngIf="email.errors.pattern">Nieprawidłowy adres email</p>
+        </div> -->
+    </mat-form-field>
+
+    <mat-form-field class="form-group">
+        <mat-label>Adres</mat-label>
+        <input matInput class="form-control" type="text" name="street" [(ngModel)]="firmModel.address.street" #street="ngModel">
+        <!-- <div *ngIf="phone.errors && phone.touched">
+            <p class="text--warn" *ngIf="phone.errors.pattern">Numer telefonu musi składać się z 9 cyfr</p>
+        </div> -->
+    </mat-form-field>
+
+    <button mat-button class="btn-success" type="button" mat-dialog-close [disabled]="firmForm.form.invalid" (click)="editFirmData()">Zaktualizuj dane</button>
+</form>
+

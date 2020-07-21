@@ -1,0 +1,29 @@
+<app-header></app-header>
+<div class="firm-container">
+    <app-sidenav></app-sidenav>
+    <div class="no-firm" *ngIf="!user.firmId">
+        <p>Obecnie nie jesteś członkiem żadnej firmy!</p>
+        <div class="firm-button-container">
+            <button mat-raised-button type="button" (click)="searchFirm()">Poszukaj firmy</button>
+            <button mat-raised-button type="button" (click)="createFirm()">Utwórz firme</button>
+        </div>
+    </div>
+    <div class="waiting-for-accept" *ngIf="user.firmStatus == 0 && user.firmId">
+        <p>Twoje zaproszenie do firmy {{firm?.name}} oczekuję na akceptacje</p>
+    </div>
+    <div class="firm" *ngIf="user.firmId && user.firmStatus > 0">
+        <div class="firm-header">
+            <h2 class="title"> {{firm?.name}} </h2>
+            <p>&bull;</p>
+            <p class="manage-button" routerLink="/zarzadzaj-firma">Zarządzaj</p>
+        </div>
+        <div class="firm-main-content">
+            <div class="grid-container">
+                <app-firm-budget-list></app-firm-budget-list>
+                <app-budget-chart [chartType]="chartType"></app-budget-chart>
+            </div>
+            <app-firm-users-list class="users-list"></app-firm-users-list>
+        </div>
+    </div>
+</div>
+<app-footer></app-footer>
