@@ -1,0 +1,10 @@
+<form class="income-form" #IncomeForm="ngForm">
+    <h2 class="title">Dodaj pieniądze do celu - {{data.goal.name}} </h2>
+
+    <mat-form-field class="form-group">
+        <mat-label>Ilość pieniędzy</mat-label>
+        <input matInput class="form-control" type="number" min="0.01" step="1" name="money" [(ngModel)]="money" required>
+    </mat-form-field>
+
+    <button mat-button class="btn-success" type="button" mat-dialog-close [disabled]="IncomeForm.form.invalid" (click)="addIncome()">Dodaj</button>
+</form>

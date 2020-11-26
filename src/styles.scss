@@ -36,6 +36,15 @@ a {
     text-decoration: none;
 }
 
+.snackbar-warn {
+    background: $warn;
+}
+
+.snackbar-success {
+    background: $success;
+    color: black;
+}
+
 .button--success {
     background-color: $success;
 }
@@ -58,4 +67,8 @@ a {
 
 .danger {
     border: 2px solid $warn !important;
+}
+
+mat-tab-body-content {
+    overflow: hidden !important;
 }

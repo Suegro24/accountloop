@@ -1,6 +1,7 @@
-<div class="chartContainer">
-  <h2 class="title">Stan konta w tym miesiącu</h2>
+<div class="chart-container">
+  <h2 class="title">Stan konta - {{monthName}}</h2>
   <ngx-charts-line-chart
+  [view]="view"
   [showXAxisLabel]="showXAxisLabel"
   [showYAxisLabel]="showYAxisLabel"
   [xAxis]="xAxis"

@@ -1,0 +1,16 @@
+@import '../../../../assets/colors.scss';
+
+.container {
+
+    .buttons-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .delete-button {
+            background-color: $warn;
+        }
+    }
+
+
+}

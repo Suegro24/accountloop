@@ -1,19 +1,24 @@
-<app-header></app-header>
+<app-header pageName="Profil"></app-header>
 <app-sidenav></app-sidenav>
 <div class="profile-container">
     <div class="profile-photo">
-        <img [src]="user.photo ? user.photo : '../../../assets/images/profile-default.png'" alt="profile">
-        <div class="profile-photo-settings">
+        <img [src]="user?.photo ? user?.photo : '../../../assets/images/profile-default.png'" alt="profile">
+        <div *ngIf="loggedInUser" class="profile-photo-settings">
             <div class="settings-item">
-                <mat-icon>add_a_photo</mat-icon>
-                <label> Dodaj zdjęcie <input #profilePhoto type="file" accepr="image/*" placeholder="Dodaj zdjęcie" (change)="addUserPhoto(profilePhoto)" style="display: none;"> </label>
+                <form action="/users/upload-image" method="POST" enctype="multipart/form-data">
+                    <mat-icon>add_a_photo</mat-icon>
+                    <label> Dodaj zdjęcie 
+                        <input name="profileImage" type="file" placeholder="Dodaj zdjęcie" style="display: none;"> 
+                    </label>
+                    <button type="submit" mat-button>Załaduj</button>
+                </form>
             </div>
         </div>
     </div>
     <div class="profile-informations-container">
         <div class="informations-header">
             <h2 class="title">Informacje</h2>
-            <p class="edit-button" (click)="editProfile()" >Edytuj</p>
+            <p *ngIf="loggedInUser" class="edit-button" (click)="editProfile()" >Edytuj</p>
         </div>
         <div class="information-item">
             <p class="label">Imię</p>

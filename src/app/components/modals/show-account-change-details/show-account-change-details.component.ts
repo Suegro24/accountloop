@@ -1,0 +1,17 @@
+import { Component, Inject, OnInit } from '@angular/core';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+
+@Component({
+  selector: 'app-show-account-change-details',
+  templateUrl: './show-account-change-details.component.html',
+  styleUrls: ['./show-account-change-details.component.scss']
+})
+export class ShowAccountChangeDetailsComponent implements OnInit {
+
+
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any) { }
+
+  ngOnInit(): void {
+  }
+
+}

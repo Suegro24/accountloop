@@ -1,0 +1,13 @@
+<div class="unblock-user-container">
+    <h2 class="title"> Zablokowani użytkownicy </h2>
+
+    <mat-list class="list">
+        <mat-list-item class="list-item" *ngFor="let user of blockedUsers"> 
+            <span>{{user.name}} {{user.surname}} </span>
+            <button class="delete-button" (click)="remove(user)" mat-raised-button><mat-icon>delete</mat-icon> </button>
+        </mat-list-item>
+    </mat-list>
+
+    <button mat-raised-button class="close-button" mat-dialog-close>Zamknij</button>
+</div>
+

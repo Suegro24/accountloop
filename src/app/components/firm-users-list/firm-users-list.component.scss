@@ -1,8 +1,39 @@
+@import '../../../assets/colors.scss';
+
 .users-list-container {
-    padding: 5px;
+    padding: 80px 5px 5px 5px;
     min-height: 100vh;
 
     .title {
         margin-top: 10px;
+    }
+
+    mat-list {
+        mat-list-item {
+            cursor: pointer;
+            position: relative;
+            &:hover  {
+                background-color: #dbd6d6;
+            }
+        }
+    }
+
+    .green-circle,
+    .red-circle {
+        position: absolute;
+        right:0;
+        top:50%;
+        transform: translateY(-50%);
+        width: 12px;
+        height: 12px;
+        border-radius: 50%; 
+    }
+
+    .green-circle {
+        background-color: $success;
+    }
+
+    .red-circle {
+        background-color: $warn;
     }
 }

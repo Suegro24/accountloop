@@ -1,0 +1,20 @@
+@import '../../../../assets/colors.scss';
+
+.unblock-user-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+
+    .title {
+        text-align: center;
+    }
+    .delete-button {
+        margin-left: auto;
+        background: $warn;
+    }
+    .close-button {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+    }
+}

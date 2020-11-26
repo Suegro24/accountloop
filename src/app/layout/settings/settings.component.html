@@ -1,0 +1,30 @@
+<app-header pageName="Ustawienia"></app-header>
+<app-sidenav></app-sidenav>
+
+<div class="settings-container">
+
+    <form class="settings-form" #SettingsForm="ngForm">
+
+        <mat-checkbox color="primary" class="form-control" type="checkbox" name="isBudgetNegativeValueAllowed" [(ngModel)]="settingsModel.isBudgetNegativeValueAllowed" #name="ngModel" required>Pozwól na negatywne wartości budżetu</mat-checkbox>
+
+        <!-- <mat-checkbox color="primary" class="form-control" type="checkbox" name="darkMode" [(ngModel)]="settingsModel.darkMode" #name="ngModel" required>Ciemny motyw</mat-checkbox> -->
+
+        <mat-checkbox color="primary" class="form-control" type="checkbox" name="notificationsSound" [(ngModel)]="settingsModel.notificationsSound" #name="ngModel" required>Dźwięk powiadomień</mat-checkbox>
+
+        <mat-checkbox color="primary" class="form-control" type="checkbox" name="allowReceivingTransfers" [(ngModel)]="settingsModel.allowReceivingTransfers" #name="ngModel" required>Otrzymuj przelewy</mat-checkbox>
+
+        <label class="volume-container">Głośność powiadomień
+            <mat-slider color="primary" class="volume" min="0" max="100" thumbLabel="true" name="notificationVolume" [(ngModel)]="settingsModel.notificationVolume" #notificationVolume="ngModel"></mat-slider>
+        </label>
+    
+        <button mat-button class="btn-success" type="button" (click)="saveSettings()">Zapisz</button>
+    </form>
+
+    <div class="buttons-container">
+        <button mat-raised-button (click)="changePassword()">Zmień hasło</button>
+
+        <button mat-raised-button (click)="unblockUser()">Odblokuj użytkownika</button>
+    </div>
+</div>
+
+<app-footer></app-footer>

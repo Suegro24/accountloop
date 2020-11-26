@@ -1,0 +1,81 @@
+<app-header pageName="Przelew firmy"></app-header>
+<app-sidenav></app-sidenav>
+
+    <mat-tab-group mat-align-tabs="center" class="money-transfer-container">
+        <mat-tab label="Przelew na swoje konto">
+            <form class="send-money-form" #SendMoneyForm="ngForm">
+                <mat-form-field class="form-group">
+                    <mat-label>Tytuł</mat-label>
+                    <input matInput class="form-control" type="text" name="name" [(ngModel)]="paymentModel.name" #name="ngModel" required>
+                </mat-form-field>
+            
+                <mat-form-field class="form-group">
+                    <mat-label>Ilość pieniędzy</mat-label>
+                    <input matInput class="form-control" type="number" min="0" name="money" [(ngModel)]="paymentModel.money" #money="ngModel" required>
+                </mat-form-field>
+            
+                <mat-form-field class="form-group">
+                    <mat-label>Wiadomość</mat-label>
+                    <textarea matInput class="form-control" name="message" [(ngModel)]="paymentModel.message" #money="ngModel"></textarea>
+                </mat-form-field>
+
+                <button mat-button class="btn-success" type="button" [disabled]="SendMoneyForm.form.invalid" 
+                (click)="sendPaymentToUser()">Wykonaj</button>
+                
+            </form>
+        </mat-tab>
+        <mat-tab label="Przelew do firmy">
+            <form class="send-money-form" #SendMoneyFormToFirm="ngForm">
+                <mat-form-field class="form-group">
+                    <mat-label>Tytuł</mat-label>
+                    <input matInput class="form-control" type="text" name="name" [(ngModel)]="paymentToFirmModel.name" #name="ngModel" required>
+                </mat-form-field>
+            
+                <mat-form-field class="form-group">
+                    <mat-label>Ilość pieniędzy</mat-label>
+                    <input matInput class="form-control" type="number" min="0" name="money" [(ngModel)]="paymentToFirmModel.money" #money="ngModel" required>
+                </mat-form-field>
+            
+                <mat-form-field class="form-group">
+                    <mat-label>Wiadomość</mat-label>
+                    <textarea matInput class="form-control" name="message" [(ngModel)]="paymentToFirmModel.message" #money="ngModel"></textarea>
+                </mat-form-field>
+
+                <button mat-button class="btn-success" type="button" [disabled]="SendMoneyFormToFirm.form.invalid" 
+                (click)="sendPaymentToFirm()">Wykonaj</button>
+                
+            </form>
+        </mat-tab>
+        <mat-tab *ngIf="user?.firmStatus > 1" label="Przelew z firmy do użytkownika">
+            <form class="send-money-form" #SendMoneyFormFromFirmToUser="ngForm">
+                <mat-form-field class="form-group">
+                    <mat-label>Tytuł</mat-label>
+                    <input matInput class="form-control" type="text" name="name" [(ngModel)]="paymentFromFirmToUserModel.name" #name="ngModel" required>
+                </mat-form-field>
+            
+                <mat-form-field class="form-group">
+                    <mat-label>Ilość pieniędzy</mat-label>
+                    <input matInput class="form-control" type="number" min="0" name="money" [(ngModel)]="paymentFromFirmToUserModel.money" #money="ngModel" required>
+                </mat-form-field>
+            
+                <mat-form-field class="form-group">
+                    <mat-label>Wiadomość</mat-label>
+                    <textarea matInput class="form-control" name="message" [(ngModel)]="paymentFromFirmToUserModel.message" #money="ngModel"></textarea>
+                </mat-form-field>
+
+                
+                <mat-form-field class="form-group">
+                    <mat-label>Użytkownik</mat-label>
+                    <mat-select multiple [(ngModel)]="selectedUser" class="select" name="user" required>
+                        <mat-option *ngFor="let user of firm?.users" [value]="user">{{user.name}} {{user.surname}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <button mat-button class="btn-success" type="button" [disabled]="SendMoneyFormFromFirmToUser.form.invalid" 
+                (click)="sendPaymentFromFirmToUser()">Wykonaj</button>
+                
+            </form>
+        </mat-tab>
+    </mat-tab-group>
+
+<app-footer></app-footer>

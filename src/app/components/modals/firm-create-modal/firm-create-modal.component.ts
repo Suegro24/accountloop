@@ -10,13 +10,14 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class FirmCreateModalComponent implements OnInit {
 
-  user = JSON.parse(localStorage.getItem('user'));
-  firmCreateModel = new Firm('', {'country': '', 'city': '', 'street': ''}, [], null, false);
+  userId = localStorage.getItem('user');
+  user;
+  firmCreateModel = new Firm('', {'country': '', 'city': '', 'street': ''}, [], null, false, []);
 
   constructor(private firmService: FirmService, private userService: UserService) { }
 
   ngOnInit(): void {
-    this.userService.getUser(this.user._id).subscribe(res => {
+    this.userService.getUser(this.userId).subscribe(res => {
       this.user = res;
     })
   }

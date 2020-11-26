@@ -1,13 +1,15 @@
 import { Address } from './address';
 import { User } from './user';
 import { FirmBudget } from './firmBudget';
+import { ChatMessageDto } from './chatMessageDto';
 
 export class Firm {
     constructor(
-        public name: String,
+        public name: string,
         public address: Address,
         public users: User[],
         public firmBudget: FirmBudget,
-        public isDeleted: Boolean
+        public isDeleted: boolean,
+        public chatMessages: ChatMessageDto[]
     ) {}
 }

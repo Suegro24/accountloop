@@ -1,0 +1,21 @@
+@import '../../../../assets/colors.scss';
+
+.income-form {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+
+    .title {
+        text-align: center;
+    }
+
+    .form-group {
+        width: 100%;
+        margin: 20px 0;
+    }
+
+    .btn-success {
+        background: $success
+    }   
+}

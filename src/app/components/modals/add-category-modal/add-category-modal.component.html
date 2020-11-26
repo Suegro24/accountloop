@@ -1,0 +1,24 @@
+<form class="category-form" #CategoryForm="ngForm">
+    <h2 class="title">Kategoria</h2>
+
+    <mat-form-field class="form-group">
+        <mat-label>Nazwa</mat-label>
+        <input matInput class="form-control" type="text" name="name" [(ngModel)]="categoryModel.name" #name="ngModel" required>
+        <!-- <div *ngIf="name.errors && name.touched">
+            <p class="text--warn" *ngIf="name.errors.required">Imie jest wymagane</p>
+            <p class="text--warn" *ngIf="name.errors.pattern">Imie nie może mieć więcej niż 20 znaków</p>
+        </div> -->
+    </mat-form-field>
+
+    <mat-form-field class="form-group icon-form-group">
+        <mat-label>Ikona</mat-label>
+        <input matInput class="form-control" type="text" name="icon" [(ngModel)]="categoryModel.icon" #icon="ngModel" required>
+        <!-- <div *ngIf="name.errors && name.touched">
+            <p class="text--warn" *ngIf="name.errors.required">Imie jest wymagane</p>
+            <p class="text--warn" *ngIf="name.errors.pattern">Imie nie może mieć więcej niż 20 znaków</p>
+        </div> -->
+        <span class="transfer"><a target="_blank" href="https://material.io/resources/icons/?style=baseline"><mat-icon>info</mat-icon></a></span>
+    </mat-form-field>
+
+    <button mat-button class="btn-success" type="button" mat-dialog-close [disabled]="CategoryForm.form.invalid" (click)="addCategory()">Dodaj kategorie</button>
+</form>

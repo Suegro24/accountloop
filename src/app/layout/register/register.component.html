@@ -1,6 +1,10 @@
 <div class="register-container">
     <form id="RegisterForm" class="register-form" #RegisterForm="ngForm">
 
+        <div class="logo">
+            <img src="../../../assets/images/logo-gray.png" alt="logo">
+        </div>
+
         <h2 class="title">Zarejestruj się</h2>
     
         <mat-form-field class="form-group">
@@ -14,7 +18,7 @@
     
         <mat-form-field class="form-group">
             <mat-label>Nazwisko</mat-label>
-            <input matInput class="form-control" type="text" [class.input--warn]="surname.invalid && surname.touched" placeholder="nazwisko" name="surname" 
+            <input matInput class="form-control" type="text" [class.input--warn]="surname.invalid && surname.touched" placeholder="Podaj swoję nazwisko..." name="surname" 
             [(ngModel)]="registerModel.surname" #surname="ngModel" pattern=".{1,20}" required>
             <!-- <div *ngIf="surname.errors && surname.touched">
                 <p class="text--warn" *ngIf="surname.errors.required">Nazwisko jest wymagane</p>
@@ -24,7 +28,7 @@
 
         <mat-form-field class="form-group">
             <mat-label>Hasło</mat-label>
-            <input matInput class="form-control" type="password" [class.input--warn]="password.invalid && password.touched" placeholder="hasło" name="password" 
+            <input matInput class="form-control" type="password" [class.input--warn]="password.invalid && password.touched" placeholder="Hasło" name="password" 
             [(ngModel)]="registerModel.password" #password="ngModel" pattern=".{8,}" required>
             <!-- <div *ngIf="password.errors && password.touched">
                 <p class="text--warn" *ngIf="password.errors.required">Hasło jest wymagane</p>
@@ -34,7 +38,7 @@
 
         <mat-form-field class="form-group">
             <mat-label>Email</mat-label>
-            <input matInput class="form-control" type="email" [class.input--warn]="email.invalid && email.touched" placeholder="email" name="email" 
+            <input matInput class="form-control" type="email" [class.input--warn]="email.invalid && email.touched" placeholder="Email" name="email" 
             [(ngModel)]="registerModel.email" #email="ngModel" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required>
             <!-- <div *ngIf="email.errors && email.touched">
                 <p class="text--warn" *ngIf="email.errors.required">Email jest wymagany</p>
@@ -44,16 +48,11 @@
 
         <mat-form-field class="form-group">
             <mat-label>Numer telefonu</mat-label>
-            <input matInput class="form-control" type="text" [class.input--warn]="phone.invalid && phone.touched" placeholder="numer telefonu" name="phone" 
+            <input matInput class="form-control" type="text" [class.input--warn]="phone.invalid && phone.touched" placeholder="Numer telefonu" name="phone" 
             [(ngModel)]="registerModel.phone" #phone="ngModel" pattern="\d{9}">
             <!-- <div *ngIf="phone.errors && phone.touched">
                 <p class="text--warn" *ngIf="phone.errors.pattern">Numer telefonu musi składać się z 9 cyfr</p>
             </div> -->
-        </mat-form-field>
-
-        <mat-form-field class="form-group">
-            <mat-label>Data urodzenia</mat-label>
-            <input matInput type="date" class="form-control" name="dateOfBirth" [(ngModel)]="registerModel.dateOfBirth" #dateOfBirth="ngModel" value="01.01.2000">
         </mat-form-field>
 
         <mat-form-field class="form-group">
@@ -64,9 +63,15 @@
             </mat-select>
         </mat-form-field>
 
-    
-        <button mat-raised-button type="button" [disabled]="RegisterForm.form.invalid" (click)="addUser()">Zarejestruj się</button>
+        <mat-form-field class="form-group flex-item-full-width" appearance="fill">
+            <mat-label>Data urodzenia</mat-label>
+            <input matInput #dateOfBirth="ngModel" name="dateOfBirth" [matDatepicker]="picker" [(ngModel)]="registerModel.dateOfBirth" disabled required>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker disabled="false"></mat-datepicker>
+        </mat-form-field>
+
+        <button mat-raised-button class="register-button" type="button" [disabled]="RegisterForm.form.invalid" (click)="addUser()">Zarejestruj się</button>
     
     </form>
-    <a routerLink="/logowanie"><p>Masz już konto ? Zaloguj się</p></a>
+    <p class="log-in-button">Masz już konto ? <a class="underline" routerLink="/logowanie">Zaloguj się</a></p>
 </div>

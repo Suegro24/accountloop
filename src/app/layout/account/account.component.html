@@ -1,66 +1,114 @@
-<app-header></app-header>
+<app-header pageName="Konto"></app-header>
 <app-sidenav></app-sidenav>
 
 <div class="account-container">
-
-    <div class="filters-container">
-        <div class="flex-container">
-            <mat-form-field>
-                <mat-label>Kategoria</mat-label>
-                <input matInput type="text" [(ngModel)]="category" autocomplete="off" (input)="changeList('category')">
-            </mat-form-field>
-
-            <mat-form-field>
-                <mat-label>Nazwa</mat-label>
-                <input matInput type="text" [(ngModel)]="name" autocomplete="off">
-            </mat-form-field>
-        </div>
-        <div class="checkboxes">
-            <mat-checkbox [(ngModel)]="checkboxes.expenses" selected>Expenses</mat-checkbox>
-            <mat-checkbox [(ngModel)]="checkboxes.incomes" selected>Incomes</mat-checkbox>
-        </div>
-
-    </div>
-
-    <div class="month-container">
-        <div class="arrow-left" (click)="previousMonth()"></div>
-        <div class="month-name"> {{currentDate | date: 'MMMM yyyy'}} </div>
-        <div class="arrow-right" (click)="nextMonth()"></div>
-    </div>
-
-    <div class="budget-list-container">
-        <div class="budget-balance">
-            <p>Stan konta: <span [class]="user.budget.money > 0 ? 'font-color-green' : 'font-color-red'">{{(user?.budget?.money || 0) | currency:' '}}zł</span> </p>
-            <mat-divider></mat-divider>
-        </div>
+    <mat-tab-group mat-align-tabs="center">
+        <mat-tab label="Historia konta">
+            <div class="filters-container">
+                <div class="flex-container">
+                    <mat-form-field class="form-group">
+                        <mat-label>Kategoria</mat-label>
+                        <mat-select [formControl]="selectedCategories" multiple>
+                            <mat-option *ngFor="let category of categories" [value]="category"> {{category.name}} </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+        
+                    <mat-form-field>
+                        <mat-label>Nazwa</mat-label>
+                        <input matInput type="text" [(ngModel)]="name" autocomplete="off">
+                    </mat-form-field>
+                </div>
+                <div class="selection-container">
+                    <div class="checkboxes">
+                        <mat-checkbox color="primary" [(ngModel)]="checkboxes.expenses" selected>Expenses</mat-checkbox>
+                        <mat-checkbox color="primary" [(ngModel)]="checkboxes.incomes" selected>Incomes</mat-checkbox>
+                    </div>
     
-        <div class="no-account-changes" *ngIf="accountChangesContainer?.length == 0">
-            <p>Brak danych</p>
-        </div>
-
-        <mat-list *ngFor="let accountChange of accountChangesContainer | budgetListPipe:category:name" class="budget-changes-list">
-            <mat-list-item *ngIf="accountChange.type == 'income' && checkboxes.incomes == true || accountChange.type == 'expense' && checkboxes.expenses == true">
-                <mat-divider></mat-divider>
-                <mat-icon mat-list-icon>credit_card</mat-icon>
-                <div mat-line> {{accountChange.name}} <span class="align-right" [class]="accountChange.type=='income' ? 'income': 'expense'"> {{accountChange.money | currency: ' '}}zł</span>  </div>
-                <div mat-line> {{accountChange.typeName}} <span class="align-right">{{accountChange.date | date:'dd.MM.yyyy'}}</span> </div>
-                <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="icon menu">
-                    <mat-icon class="more-icon">more_vert</mat-icon>
-                </button>
-                <mat-menu #menu="matMenu">
-                    <button mat-menu-item>
-                        <mat-icon>edit</mat-icon>
-                        <span>Edytuj</span>
-                    </button>
-                    <button mat-menu-item>
-                        <mat-icon>delete</mat-icon>
-                        <span>Usuń</span>
-                    </button>
-                </mat-menu>
-                <span [class]="accountChange.type=='income' ? 'green-line' : 'red-line'"></span>
-            </mat-list-item>
-        </mat-list>
-    </div>
+                    <mat-chip-list class="chips-container" #categoryChips aria-label="Selected categories">
+                        <mat-chip selected color="primary" *ngFor="let category of selectedCategories.value">{{category?.name}}</mat-chip>
+                    </mat-chip-list>
+                </div>
+            </div>
+        
+            <div class="month-container">
+                <div class="arrow-left" (click)="previousMonth()"></div>
+                <div class="month-name"> {{currentDate | date: 'MMMM yyyy'}} </div>
+                <div class="arrow-right" (click)="nextMonth()"></div>
+            </div>
+        
+            <div class="budget-list-container">
+                <div class="budget-balance">
+                    <p>Stan konta: <span [class]="user?.budget?.money > 0 ? 'font-color-green' : 'font-color-red'">{{(user?.budget?.money || 0) | currency:' '}}zł</span> </p>
+                    <mat-divider></mat-divider>
+                </div>
+            
+                <div class="no-account-changes" *ngIf="accountChangesContainer?.length == 0">
+                    <p>Brak danych</p>
+                </div>
+        
+                <mat-list *ngFor="let accountChange of accountChangesContainer | budgetListPipe:selectedCategories.value:name" class="budget-changes-list">
+                    <mat-list-item (click)="showDetails(accountChange)" *ngIf="accountChange.type == 'income' && checkboxes.incomes == true || accountChange.type == 'expense' && checkboxes.expenses == true">
+                        <mat-divider></mat-divider>
+                        <mat-icon mat-list-icon>credit_card</mat-icon>
+                        <div mat-line> {{accountChange.name}} <span class="align-right" [class]="accountChange.type=='income' ? 'income': 'expense'"> {{accountChange.money | currency: ' '}}zł</span>  </div>
+                        <div mat-line> {{accountChange.category.name}} <span class="align-right">{{accountChange.date | date:'dd.MM.yyyy'}}</span> </div>
+                        <span [class]="accountChange.type=='income' ? 'green-line' : 'red-line'"></span>
+                    </mat-list-item>
+                </mat-list>
+            </div>
+        </mat-tab>
+        <mat-tab label="Cele">
+            <div class="grid-container">
+                <div class="goals-ongoing-container">
+                    <p class="title">Trwające cele</p>
+                    <mat-divider></mat-divider>
+                    <mat-list class="list" *ngFor="let goal of budgetGoals">
+                        <mat-list-item class="list-item" *ngIf="!goal.isCompleted">
+                            <div mat-line class="header">
+                                <span class="header-small">
+                                    <mat-icon>emoji_events</mat-icon>
+                                    <span>{{goal.name}}</span>
+                                </span>
+                                <span>{{goal.currentState | currency: ' '}}/{{goal.goal | currency:' '}}zł</span>
+                            </div>
+                            <div mat-line><mat-progress-bar class="progress-bar" mode="determinate" [value]="goal.progress"></mat-progress-bar></div>
+                            <button class="add-money-button" mat-button (click)="addMoney(goal)">+</button>
+                            <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                                <mat-icon>more_vert</mat-icon>
+                            </button>
+                            <mat-menu #menu="matMenu">
+                                <button mat-menu-item (click)="editGoal(goal)">
+                                  <mat-icon>edit</mat-icon>
+                                  <span>Edytuj</span>
+                                </button>
+                                <button mat-menu-item (click)="deleteGoal(goal)">
+                                  <mat-icon>delete</mat-icon>
+                                  <span>Usuń</span>
+                                </button>
+                              </mat-menu>
+                            <mat-divider></mat-divider>
+                        </mat-list-item>
+                    </mat-list>
+                </div>
+                <div class="goals-completed-container">
+                    <p class="title">Ukończone cele</p>
+                    <mat-divider></mat-divider>
+                    <mat-list class="list" *ngFor="let goal of completedGoals">
+                        <mat-list-item class="list-item">
+                            <div mat-line class="header">
+                                <span class="header-small">
+                                    <mat-icon>emoji_events</mat-icon>
+                                    <span>{{goal.name}}</span>
+                                </span>
+                                <span>{{goal.currentState | currency: ' '}}/{{goal.goal | currency:' '}}zł</span>
+                                <mat-icon class="complete-icon">check_circle</mat-icon>
+                            </div>
+                        </mat-list-item>
+                    </mat-list>
+                </div>
+            </div>
+            <button mat-fab class="button-create" (click)="addBudgetGoal()"><mat-icon>add</mat-icon></button>
+        </mat-tab>
+    </mat-tab-group>
 </div>
-
 <app-footer></app-footer>

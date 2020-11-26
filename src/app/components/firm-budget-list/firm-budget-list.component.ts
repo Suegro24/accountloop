@@ -4,6 +4,7 @@ import { AddIncomeModalComponent } from '../modals/add-income-modal/add-income-m
 import { FirmService } from 'src/app/services/firm.service';
 import { UserService } from 'src/app/services/user.service';
 import { AddExpenseModalComponent } from '../modals/add-expense-modal/add-expense-modal.component';
+import { ShowAccountChangeDetailsComponent } from '../modals/show-account-change-details/show-account-change-details.component';
 
 @Component({
   selector: 'app-firm-budget-list',
@@ -13,6 +14,7 @@ import { AddExpenseModalComponent } from '../modals/add-expense-modal/add-expens
 export class FirmBudgetListComponent implements OnInit {
 
   user;
+  userId = localStorage.getItem('user');
   firm;
   accountChangesContainer;
   acceptedBudgetChanges = 0;
@@ -20,23 +22,22 @@ export class FirmBudgetListComponent implements OnInit {
   constructor(private dialog: MatDialog, private firmService: FirmService, private userService: UserService) { }
 
   ngOnInit(): void {
-    this.user = JSON.parse(localStorage.getItem('user'));
     this.refresh();
   }
 
   refresh() {
-    this.userService.getUser(this.user._id).subscribe(res => {
+    this.userService.getUser(this.userId).subscribe(res => {
       this.user = res;
 
-      this.firmService.getFirm(this.user.firmId).subscribe(res => {
-        this.firm = res;
-        this.accountChangesContainer = [...this.firm.firmBudget.income,...this.firm.firmBudget.expense];
-        this.accountChangesContainer = this.accountChangesContainer.sort((a,b) => Date.parse(b.date) - Date.parse(a.date));
+      this.firmService.getFirm(this.user.firmId).subscribe(response => {
+        this.firm = response;
+        this.accountChangesContainer = [...this.firm.firmBudget.income, ...this.firm.firmBudget.expense];
+        this.accountChangesContainer = this.accountChangesContainer.sort((a, b) => Date.parse(b.date) - Date.parse(a.date));
         this.accountChangesContainer.forEach(change => {
-          if (change.status == 'Accepted') this.acceptedBudgetChanges++;
+          if (change.status === 'Accepted') { this.acceptedBudgetChanges++; }
         });
-      })
-    })
+      });
+    });
   }
 
   addIncome() {
@@ -49,8 +50,8 @@ export class FirmBudgetListComponent implements OnInit {
     });
     ref.afterClosed().subscribe(() => {
       this.refresh();
-    })
-  } 
+    });
+  }
 
   addExpense() {
     const ref = this.dialog.open(AddExpenseModalComponent, {
@@ -62,7 +63,15 @@ export class FirmBudgetListComponent implements OnInit {
     });
     ref.afterClosed().subscribe(() => {
       this.refresh();
-    })
+    });
+  }
+
+  showDetails(data) {
+    this.dialog.open(ShowAccountChangeDetailsComponent, {
+      data: {
+        data
+      }
+    });
   }
 
 }

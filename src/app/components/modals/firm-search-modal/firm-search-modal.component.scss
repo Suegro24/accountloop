@@ -3,7 +3,16 @@
 .firm-search-container {
     width: 40vw;
 
+    mat-spinner {
+        margin: 0 auto;
+        padding: 5px;
+    }
+
     .title {
+        text-align: center;
+    }
+
+    .no-firms {
         text-align: center;
     }
 

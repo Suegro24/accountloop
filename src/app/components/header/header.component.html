@@ -1,10 +1,19 @@
 <header>
-    <!-- <img class="logo" src="#" alt="logo"> -->
-    <nav class="nav">
+    <nav class="nav" *ngIf="userService.loggedIn()">
+        <div class="current-page">
+            {{pageName}}
+        </div>
         <ul class="nav-list">
-            <li class="nav-item">  </li>
-            <li class="nav-item" routerLink="/profil"> {{user?.name | titlecase}} </li>
+            <li *ngIf="!isAdminLoggedIn" class="nav-item" routerLink="/profil"> {{user?.name | titlecase}} </li>
+            <li *ngIf="isAdminLoggedIn" class="nav-item-disabled" > {{user?.name | titlecase}} </li>
             <li class="nav-item" (click)="logout()">Wyloguj się</li>
+        </ul>
+    </nav>
+    <nav class="nav" *ngIf="!userService.loggedIn()">
+        <img class="header-logo" src="../../../assets/images/logo.png" alt="logo">
+        <ul class="nav-list">
+            <li class="nav-item" routerLink="/logowanie">Zaloguj się</li>
+            <li class="nav-item" routerLink="/rejestracja">Zarejestruj się</li>
         </ul>
     </nav>
 </header>

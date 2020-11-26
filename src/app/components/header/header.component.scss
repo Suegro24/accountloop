@@ -1,29 +1,47 @@
+@import '~@angular/material/theming';
 @import '../../../assets/colors.scss';
 
 header {
-    position: relative;
+    position: fixed;
     top:0;
     left:0;
     width: 100%;
     max-width: 100%;
-    height: 60px;
+    height: 61px;
+    box-shadow: 0px 0px 3px 0px #000000bf;
     background-color: $primary;
-
-    .logo {
-        position: absolute;
-        left: 20px;
-        top: 50%;
-        transform: translateY(-50%);
-    }
+    z-index:2;
 
     .nav {
         position: absolute;
-        right: 10px;
+        left: 0px;
         top: 50%;
         transform: translateY(-50%);
-        width: 20%;
+        width: 100%;
+
+        .current-page {
+            position: absolute;
+            left: 250px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 20px;
+            color: $font-white;
+        }
+
+        .header-logo {
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            height: 60px;
+        }
 
         .nav-list {
+            position:absolute;
+            right: 20px;
+            top:50%;
+            transform: translateY(-50%);
+            width: 20%;
             display: flex;
             justify-content: space-evenly;
             align-items: center;
@@ -33,6 +51,11 @@ header {
                 color: $font-white;
                 font-size: 16px;
                 cursor: pointer;
+            }
+
+            .nav-item-disabled {
+                @extend .nav-item;
+                cursor: default;
             }
         }
     }

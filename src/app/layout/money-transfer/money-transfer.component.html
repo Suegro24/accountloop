@@ -1,4 +1,4 @@
-<app-header></app-header>
+<app-header pageName="Przelew"></app-header>
 <app-sidenav></app-sidenav>
 
     <mat-tab-group mat-align-tabs="center" class="money-transfer-container">
@@ -11,28 +11,27 @@
     
                 <mat-list role="list" class="list" *ngFor="let user of users | moneyTransferPipe:searchedUser:'users'">
                     <mat-list-item role="listitem" class="list-item">
-                        <p>{{user.name}} {{user.surname}}</p>
+                        <p (click)="goToProfile(user._id)">{{user.name}} {{user.surname}}</p>
                         <button mat-button class="send-button" (click)="sendMoney(user, 'user')"><mat-icon>payment</mat-icon></button>
                     </mat-list-item>
                     <mat-divider></mat-divider>
                 </mat-list>
             </div>
         </mat-tab>
-        <mat-tab label="Przelew do firmy">
-            <div class="transfer-user-container">
-                <mat-form-field>
-                    <mat-label>Wyszukaj firme</mat-label>
-                    <input matInput type="text" [(ngModel)]="searchedFirm" autocomplete="off">
+        <mat-tab *ngIf="user?.firmId && user?.firmId!=''" label="Przelew do firmy">
+            <form class="send-money-form" #SendMoneyForm="ngForm">
+                <mat-form-field class="form-group">
+                    <mat-label>Tytuł</mat-label>
+                    <input matInput class="form-control" type="text" name="name" [(ngModel)]="paymentModel.name" #name="ngModel" required>
                 </mat-form-field>
-
-                <mat-list role="list" class="list" *ngFor="let firm of firms | moneyTransferPipe:searchedFirm:'firms'">
-                    <mat-list-item role="listitem" class="list-item">
-                        <p>{{firm.name}}</p>
-                        <button mat-button class="send-button" (click)="sendMoney(firm, 'firm')"><mat-icon>payment</mat-icon></button>
-                    </mat-list-item>
-                    <mat-divider></mat-divider>
-                </mat-list>
-            </div>
+            
+                <mat-form-field class="form-group">
+                    <mat-label>Ilość pieniędzy</mat-label>
+                    <input matInput class="form-control" type="number" min="0" name="money" [(ngModel)]="paymentModel.money" #money="ngModel" required>
+                </mat-form-field>
+            
+                <button mat-button class="btn-success" type="button" [disabled]="SendMoneyForm.form.invalid" (click)="sendMoneyToFirmAccount()">Wykonaj</button>
+            </form>
         </mat-tab>
         <mat-tab label="Oczekujące przelewy">
             <mat-card *ngFor="let payment of awaitingPayments" class="awaiting-payments-container">

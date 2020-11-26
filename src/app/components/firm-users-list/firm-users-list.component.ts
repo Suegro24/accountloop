@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
 import { FirmService } from 'src/app/services/firm.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-firm-users-list',
@@ -9,20 +10,31 @@ import { FirmService } from 'src/app/services/firm.service';
 })
 export class FirmUsersListComponent implements OnInit {
 
-  user = JSON.parse(localStorage.getItem('user'));
+  userId = localStorage.getItem('user');
+  user;
   users;
 
-  constructor(private userService: UserService, private firmService: FirmService) { }
+  constructor(private userService: UserService, private firmService: FirmService, private router: Router) { }
 
   ngOnInit(): void {
-    this.userService.getUser(this.user._id).subscribe(res => {
+    this.userService.getUser(this.userId).subscribe(res => {
       this.user = res;
 
-      this.firmService.getFirm(this.user.firmId).subscribe(res => {
-        this.users = res;
+      this.firmService.getFirm(this.user.firmId).subscribe(response => {
+        this.users = response;
         this.users = this.users.users;
-      })
-    })
+
+        this.users = this.users.sort((userOne, userTwo) => {
+          if (userOne.firmStatus < userTwo.firmStatus) { return 1; }
+          if (userOne.firmStatus > userTwo.firmStatus) { return -1; }
+          return 0;
+        });
+      });
+    });
+  }
+
+  goToProfile(id) {
+    this.router.navigate(['/profil'], {queryParams: {id}});
   }
 
 

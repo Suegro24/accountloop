@@ -1,0 +1,23 @@
+<form class="budget-goal-form" #BudgetGoalForm="ngForm">
+    <h2 class="title">Cel</h2>
+
+    <mat-form-field class="form-group">
+        <mat-label>Nazwa</mat-label>
+        <input matInput class="form-control" type="text" name="name" [(ngModel)]="budgetGoalModel.name" #name="ngModel" required>
+        <!-- <div *ngIf="name.errors && name.touched">
+            <p class="text--warn" *ngIf="name.errors.required">Imie jest wymagane</p>
+            <p class="text--warn" *ngIf="name.errors.pattern">Imie nie może mieć więcej niż 20 znaków</p>
+        </div> -->
+    </mat-form-field>
+
+    <mat-form-field class="form-group icon-form-group">
+        <mat-label>Kwota do uzbierania</mat-label>
+        <input matInput class="form-control" type="number" name="goal" [(ngModel)]="budgetGoalModel.goal" #goal="ngModel" required>
+        <!-- <div *ngIf="name.errors && name.touched">
+            <p class="text--warn" *ngIf="name.errors.required">Imie jest wymagane</p>
+            <p class="text--warn" *ngIf="name.errors.pattern">Imie nie może mieć więcej niż 20 znaków</p>
+        </div> -->
+    </mat-form-field>
+
+    <button mat-button class="btn-success" type="button" [mat-dialog-close]="true" [disabled]="BudgetGoalForm.form.invalid" (click)="addBudgetGoal()">Dodaj cel</button>
+</form>

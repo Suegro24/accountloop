@@ -1,10 +1,13 @@
+import { Category } from './category';
+
 export class Expense {
     constructor(
         public name: string,
         public money: number,
         public date: Date,
-        public typeName: string,
+        public category: Category,
         public type: string,
-        public status: string
+        public status: string,
+        public recipientName: string
     ) {}
 }

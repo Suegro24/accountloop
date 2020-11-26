@@ -10,7 +10,7 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 })
 export class EditFirmDataModalComponent implements OnInit {
 
-  firmModel = new Firm('', {'country': '', 'city': '', 'street': ''}, [], null, false);
+  firmModel = new Firm('', {'country': '', 'city': '', 'street': ''}, [], null, false, []);
 
   constructor(private firmService: FirmService, @Inject(MAT_DIALOG_DATA) public data: any ) { }
 

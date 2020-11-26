@@ -10,24 +10,31 @@ import { UserService } from 'src/app/services/user.service';
 export class FirmSearchModalComponent implements OnInit {
 
   user;
+  userId = localStorage.getItem('user');
   firms: any;
   searchedFirm = '';
-  activeFirms: number;
+  activeFirms = 0;
+  ready;
 
   constructor(private firmService: FirmService, private userService: UserService) { }
 
   ngOnInit(): void {
-    this.user = JSON.parse(localStorage.getItem('user'));
+    this.ready = false;
     this.firmService.getFirms().subscribe(res => {
       this.firms = res;
-      this.firms.forEach(firm => {
-        if (firm.isDeleted != true) this.activeFirms++;
+      this.firms = this.firms.filter(firm => {
+        if (firm.isDeleted !== true) {
+          this.activeFirms++;
+          return firm;
+        }
       });
-    })
+      this.ready = true;
+      console.log(this.firms);
+    });
 
-    this.userService.getUser(this.user._id).subscribe(res => {
+    this.userService.getUser(this.userId).subscribe(res => {
       this.user = res;
-    })
+    });
   }
 
   joinFirm(id) {

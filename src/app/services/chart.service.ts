@@ -6,17 +6,49 @@ import { ConnectionService } from './connection.service';
 })
 export class ChartService {
 
+  public monthNames = ['Styczeń', 'Luty', 'Marzec', 'Kwiecień', 'Maj', 'Czerwiec', 'Lipiec', 'Sierpień', 'Wrzesień', 'Październik', 'Listopad', 'Grudzień'];
+
   constructor(private conn: ConnectionService) { }
 
-  getCurrentMonthChart(id: string) {
-    return this.conn.http.get(this.conn.url + `/charts/currentMonthChart/${id}`);
+  getMonthName(monthValue: number) {
+    return this.monthNames[monthValue];
   }
 
-  getFirmCurrentMothChart(id: string) {
-    return this.conn.http.get(this.conn.url + `/charts/currentMonthChart/firm/${id}`);
+  getCurrentMonthChart(id: string, month: string) {
+    let data = {month: month};
+    return this.conn.http.get(this.conn.url + `/charts/currentMonthChart/${id}`, {
+      params: data
+    });
   }
 
-  getCurrentMonthVerticalIncomeExpenseChart(id: string) {
-    return this.conn.http.get(this.conn.url + `/charts/currentMonthVerticalIncomeExpenseChart/${id}`);
+  getFirmCurrentMothChart(id: string, month: string) {
+    let data = {month: month};
+    return this.conn.http.get(this.conn.url + `/charts/currentMonthChart/firm/${id}`, {
+      params: data
+    });
   }
+
+  getCurrentMonthVerticalIncomeExpenseChart(id: string, month: string) {
+    let data = {month:month};
+    return this.conn.http.get(this.conn.url + `/charts/currentMonthVerticalIncomeExpenseChart/${id}`, {
+      params: data
+    });
+  }
+
+  getFirmCurrentMonthVerticalIncomeExpenseChart(id: string, month: string) {
+    let data = {month:month};
+    return this.conn.http.get(this.conn.url + `/charts/currentMonthVerticalIncomeExpenseChart/firm/${id}`, {
+      params: data
+    });
+  }
+
+  getForecastingChart(id: string) {
+    return this.conn.http.get(this.conn.url + `/charts/forecasting-chart/${id}`);
+  }
+
+  getFirmForecastingChart(id: string) {
+    return this.conn.http.get(this.conn.url + `/charts/forecasting-chart/firm/${id}`);
+  }
+
+  
 }

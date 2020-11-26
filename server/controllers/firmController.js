@@ -1,11 +1,13 @@
 const express = require('express');
 const mongoose = require('mongoose');
-var router = express.Router();
+const router = express.Router();
 
 const Firm = require('../models/firm');
 const Address = require('../models/address');
 const FirmBudget = require('../models/firmBudget');
 const User = require('../models/user');
+const Budget = require('../models/budget');
+const Category = require('../models/category');
 
 router.get('/', (req, res) => {
     Firm.find({})
@@ -28,6 +30,17 @@ router.get('/:id', (req, res) => {
         else {
             firm.firmBudget.money = calculateMoney(firm);
             res.json(firm);
+        }
+    })
+})
+
+router.get('/messages/:id', (req, res) => {
+    if (req.params.id == 'undefined') return;
+    Firm.findById(req.params.id)
+    .exec(function(error, firm) {
+        if (error) console.error(error);
+        else {
+            res.json(firm.chatMessages);
         }
     })
 })
@@ -55,14 +68,15 @@ router.post('/createfirm', (req, res) => {
         'users': req.body.user
     })
 
-
-
     User.updateOne({_id: changedUser._id}, {$set: changedUser}, (error) => {
         console.error(error);
     })
 
     newFirm.save(function(error) {
         if (error) console.error(error);
+        else {
+            res.send().status(200);
+        }
     })
 
 })
@@ -71,6 +85,9 @@ router.put('/:id', (req,res) => {
     const changedFirm = req.body;
     Firm.updateOne({_id: req.body._id}, {$set: changedFirm}, (error) => {
         if (error) console.error(error);
+        else {
+            res.send().status(200);
+        }
     })
 })
 
@@ -85,7 +102,7 @@ router.put('/:firmId/acceptBudgetChange/:id', (req,res) => {
                     if(change._id == req.params.id) {
                         change.status = 'Accepted';
                         firm.save();
-                        return;
+                        res.send().status(200);
                     }
                 }
             })
@@ -102,7 +119,6 @@ router.put('/:firmId/discardBudgetChange/:id', (req,res) => {
                 if (income._id == req.params.id) {
                     firm.firmBudget.income.splice(index, 1)
                     firm.save();
-                    return;
                 }
             })
 
@@ -110,7 +126,7 @@ router.put('/:firmId/discardBudgetChange/:id', (req,res) => {
                 if (expense._id == req.params.id) {
                     firm.firmBudget.expense.splice(index, 1)
                     firm.save();
-                    return;
+                    res.send().status(200);
                 }
             })
         }
@@ -129,12 +145,27 @@ router.put('/delete/:id', (req,res) => {
                     else {
                         user.firmId = undefined;
                         user.firmStatus = 0;
+                        let money = calculateMoney(user);
+                        user.budget.income.push({
+                            money: money,
+                            name: 'Pieniądze z konta indywidualnego',
+                            category: {
+                                name: 'Inne',
+                                icon: 'person'
+                            },
+                            type: 'income',
+                            date: new Date(),
+                            status: 'Accepted',
+                            message: 'Twoja firma została usunięta, pieniądze z konta indywidualnego zostały przelane na Twoje konto główne'
+                        });
+                        user.firmBudget = new Budget();
                         user.save();
                     }
                 })
             })
             firm.isDeleted=true;
             firm.save();
+            res.send().status(200);
         }
     })
 })

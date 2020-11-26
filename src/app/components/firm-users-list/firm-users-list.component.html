@@ -2,6 +2,8 @@
     <h2 class="title">Lista pracowników</h2>
     <mat-divider></mat-divider>
     <mat-list *ngFor="let user of users">
-        <mat-list-item *ngIf="user.firmStatus > 0" > {{user?.name}} {{user?.surname}} </mat-list-item>
+        <mat-list-item (click)="goToProfile(user._id)" *ngIf="user.firmStatus > 0"> <mat-icon color="primary"> {{user.firmStatus == 3 ? 'looks_3' : user.firmStatus == 2 ? 'looks_two' : 'looks_one'}} </mat-icon> {{user?.name}} {{user?.surname}} 
+        <span [class]='user.isOnline ? "green-circle" : "red-circle"'>  </span>
+        </mat-list-item>
     </mat-list>
 </div>

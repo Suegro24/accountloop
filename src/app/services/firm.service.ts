@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ConnectionService } from './connection.service';
 import { Firm } from '../models/firm';
+import { ChatMessageDto } from '../models/chatMessageDto';
 
 @Injectable({
   providedIn: 'root'
@@ -17,15 +18,19 @@ export class FirmService {
     return this.conn.http.get<Firm>(this.conn.url + `/firms/${id}`);
   }
 
+  getMessages(id: string) {
+    return this.conn.http.get<ChatMessageDto[]>(this.conn.url + `/firms/messages/${id}`);
+  }
+
   editFirm(id, firm) {
     return this.conn.http.put(this.conn.url + `/firms/${id}`, firm);
   }
 
   addFirm(firm, user) {
     return this.conn.http.post(this.conn.url + '/firms/createfirm', {
-      'firm': firm,
-      'user': user
-    })
+      firm,
+      user
+    });
   }
 
   acceptBudgetChange(firmId, id) {

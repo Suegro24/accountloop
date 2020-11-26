@@ -1,6 +1,8 @@
 import { Position } from './position';
 import { Budget } from './budget';
- 
+import { Settings } from './settings';
+import { BudgetGoals } from './budgetGoals';
+
 export class User {
     constructor(
         public name: string,
@@ -16,7 +18,13 @@ export class User {
         public position: Position,
         public firmId: string,
         public firmStatus: number,
+        public firmBudget: Budget,
         public disabledUser: [],
-        public awaitingPaymentsToAccept: number
+        public awaitingPaymentsToAccept: number,
+        public admin: boolean,
+        public settings: Settings,
+        public isUserBlocked: boolean,
+        public budgetGoals: BudgetGoals[],
+        public isOnline: boolean
     ) {}
 }

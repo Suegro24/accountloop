@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { User } from 'src/app/models/user';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
@@ -11,16 +11,33 @@ import { UserService } from 'src/app/services/user.service';
 export class HeaderComponent implements OnInit {
 
   user: User;
+  userId;
+  isUserLoggedIn: boolean;
+  @Input() isAdminLoggedIn: boolean = false;
+  @Input() pageName: string;
 
-  constructor(private userService: UserService, private router: Router) { }
+  constructor(public userService: UserService, private router: Router) { }
 
   ngOnInit(): void {
-    this.user = JSON.parse(localStorage.getItem('user'));
+    if (!localStorage.getItem('user')) {
+      this.isUserLoggedIn = false;
+    } 
+    else {
+      this.isUserLoggedIn = true;
+      this.userId = localStorage.getItem('user');
+      this.userService.getUser(this.userId).subscribe(
+        res => {
+          this.user = res;
+        },
+        error => console.error(error),
+      )
+    } 
   }
 
   logout() {
     localStorage.removeItem('user');
-    this.userService.isUserLoggedIn = false;
+    localStorage.removeItem('token');
+    this.userService.changeOnlineStatus(this.userId).subscribe();
     this.router.navigate(['/logowanie']);
   }
 

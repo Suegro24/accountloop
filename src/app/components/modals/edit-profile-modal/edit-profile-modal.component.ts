@@ -9,20 +9,21 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class EditProfileModalComponent implements OnInit {
 
-  profileModel = new User('','','','','','','',null,'',null,null,'',0,[],0);
+  profileModel = new User('', '', '', '', '', '', '', null, '', null, null, '', 0, null, [], 0, null, null, null, [], null);
+  userId = localStorage.getItem('user');
   user;
 
   constructor(private userService: UserService) { }
 
   ngOnInit(): void {
-    this.user = JSON.parse(localStorage.getItem('user'));
-    this.userService.getUser(this.user._id).subscribe(res => {
+    this.userId = localStorage.getItem('user');
+    this.userService.getUser(this.userId).subscribe(res => {
       this.profileModel = res;
-    })
+    });
   }
 
   editProfile() {
-    this.userService.editUser(this.user._id, this.profileModel).subscribe();
+    this.userService.editUser(this.userId, this.profileModel).subscribe();
   }
 
 }

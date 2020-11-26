@@ -2,8 +2,11 @@
     <mat-sidenav #drawer [ngClass]="{hidden: !(isHandset | async)!.matches}" fixedInViewport="false" 
     [attr.role]="isHandset ? 'dialog' : 'navigation'" [mode]="(isHandset | async)!.matches ? 'over' : 'side'"
     [opened]="!(isHandset | async)!.matches">
-        <mat-nav-list>
-            <div class="sidemenu--title" routerLink="/przeglad"><img class="logo" src="../../../assets/images/logo.png" alt="logo"></div>
+        <mat-nav-list *ngIf="!isAdminLoggedIn">
+
+            <div class="sidemenu--title" routerLink="/przeglad">
+                <img class="logo" src="../../../assets/images/logo.png" alt="logo">
+            </div>
 
             <mat-divider></mat-divider>
 
@@ -30,14 +33,22 @@
                 <mat-icon>business</mat-icon>
                 <p class="list-item--text">Firma</p>
             </a>
-            <span *ngIf="user.firmId" >
-                <a class="list-item" mat-list-item routerLink="/wykresy-firma">
+            <span *ngIf="user?.firmId" >
+                <a class="list-item" mat-list-item routerLink="/firma-konto">
+                    <mat-icon>account_tree</mat-icon>
+                    <p class="list-item--text">Konto indywidualne</p>
+                </a>
+                <a class="list-item" mat-list-item routerLink="/firma-wykresy">
                     <mat-icon>bar_chart</mat-icon>
                     <p class="list-item--text">Wykresy</p>
                 </a>
-                <a class="list-item" mat-list-item routerLink="/czat">
+                <a class="list-item" mat-list-item routerLink="/chat">
                     <mat-icon>chat</mat-icon>
                     <p class="list-item--text">Czat</p>
+                </a>
+                <a class="list-item" mat-list-item routerLink="/przelew-firma">
+                    <mat-icon>local_atm</mat-icon>
+                    <p class="list-item--text">Przelew</p>
                 </a>
                 <a class="list-item" mat-list-item routerLink="/zarzadzaj-firma">
                     <mat-icon>build</mat-icon>
@@ -55,7 +66,30 @@
                 <mat-icon>help</mat-icon>
                 <p class="list-item--text">Pomoc</p>
             </a>
+        </mat-nav-list>
 
+        <mat-nav-list *ngIf="isAdminLoggedIn">
+            
+            <div class="sidemenu--title" routerLink="/admin-panel">
+                <img class="logo" src="../../../assets/images/logo.png" alt="logo">
+            </div>
+
+            <mat-divider></mat-divider>
+
+            <a class="list-item" mat-list-item routerLink="/admin-panel-users">
+                <mat-icon>person</mat-icon>
+                <p class="list-item--text">Użytkownicy</p>
+            </a>
+
+            <a class="list-item" mat-list-item routerLink="/admin-panel-messages">
+                <mat-icon>email</mat-icon>
+                <p class="list-item--text">Wiadomości</p>
+            </a>
+
+            <a class="list-item" mat-list-item routerLink="/admin-panel-categories">
+                <mat-icon>category</mat-icon>
+                <p class="list-item--text">Kategorie</p>
+            </a>
         </mat-nav-list>
     </mat-sidenav>
     <mat-sidenav-content>

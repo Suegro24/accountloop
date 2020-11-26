@@ -1,0 +1,71 @@
+@import '../../../assets/colors.scss';
+
+.chat-container {
+    background: $background;
+    width: calc(100%-200px);
+    margin-left: 200px;
+    height: 100%;
+    padding-top: 60px;
+    overflow:hidden;
+
+    .page-title {
+        text-align: center;
+        padding-top: 20px;
+    }
+
+    .chatroom {
+        width: 80%;
+        height: 70vh;
+        margin: 0 auto;
+        background-color: white;
+        border-radius: 5px;
+        position: relative;
+
+        .chat-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            padding-top: 20px;
+
+            .chat-list-item {
+                display: flex;
+                padding: 5px 20px;
+
+                .username {
+                    margin-right: 10px;
+                }
+            }
+        }
+
+        .chat-form {
+            position: absolute;
+            bottom:10px;
+            left:2.5%;
+            width: 95%;
+            height: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            
+            .message {
+                width: 80%;
+                height: 40px;
+                border-radius: 20px;
+                border:none;
+                background-color: whitesmoke;
+                padding: 10px;
+
+                &:focus {
+                    outline:none;
+                }
+            }
+
+            .send-button {
+                width:10%;
+                min-width: 60px;
+                cursor: pointer;
+                background-color: $primary;
+            }
+        }
+    }
+}

@@ -1,17 +1,17 @@
-<app-header></app-header>
+<app-header pageName="Firma"></app-header>
 <div class="firm-container">
-    <app-sidenav></app-sidenav>
-    <div class="no-firm" *ngIf="!user.firmId">
+    <app-sidenav shouldRefresh="sidenavRefresh"></app-sidenav>
+    <div class="no-firm" *ngIf="!user?.firmId">
         <p>Obecnie nie jesteś członkiem żadnej firmy!</p>
         <div class="firm-button-container">
             <button mat-raised-button type="button" (click)="searchFirm()">Poszukaj firmy</button>
             <button mat-raised-button type="button" (click)="createFirm()">Utwórz firme</button>
         </div>
     </div>
-    <div class="waiting-for-accept" *ngIf="user.firmStatus == 0 && user.firmId">
+    <div class="waiting-for-accept" *ngIf="user?.firmStatus == 0 && user?.firmId">
         <p>Twoje zaproszenie do firmy {{firm?.name}} oczekuję na akceptacje</p>
     </div>
-    <div class="firm" *ngIf="user.firmId && user.firmStatus > 0">
+    <div class="firm" *ngIf="user?.firmId && user?.firmStatus > 0">
         <div class="firm-header">
             <h2 class="title"> {{firm?.name}} </h2>
             <p>&bull;</p>

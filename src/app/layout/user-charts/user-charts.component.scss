@@ -1,6 +1,7 @@
 @import '../../../assets/colors.scss';
 
-.container {
+.user-charts-container {
+
     display: grid;
     grid-template-columns: repeat(2, 1fr); 
     gap: 100px 100px;
@@ -9,5 +10,54 @@
     margin-left: 200px;
     background-color: $background;
     min-height: 100vh;
-    padding: 50px;
+    padding: 100px 50px 50px 50px;
+
+    .container-small {
+        
+        .month-container {
+            background-color: white;
+            width: 80%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 10px;
+            margin: 40px auto;
+            box-shadow: 0px 0px 4px 0px #000000bf;
+    
+            .month-name {
+                font-size: 20px;
+            }
+    
+            .arrow-left, .arrow-right {
+                position:relative;
+                width: 20px;
+                height: 40px;
+                cursor: pointer;
+    
+                &::before, &::after {
+                    content: '';
+                    top:50%;
+                    position: absolute;
+                    width: 80%;
+                    height: 3px;
+                    border-radius: 30%;
+                    background-color: black;
+                    transform: rotate(45deg);
+                    transform-origin: left;
+                    cursor: pointer;
+                }
+    
+                &::before {
+                    transform: rotate(-45deg);
+                }
+            }
+    
+            .arrow-right {
+    
+                &::before, &::after {
+                    transform-origin: right;
+                }
+            }
+        }
+    }
 }

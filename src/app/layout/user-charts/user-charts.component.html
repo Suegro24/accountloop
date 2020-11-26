@@ -1,7 +1,25 @@
-<app-header></app-header>
+<app-header pageName="Wykresy"></app-header>
 <app-sidenav></app-sidenav>
-<div class="container">
-    <app-budget-chart [chartType]="chartType"></app-budget-chart>
-    <app-vertical-bar-chart-incomes-expenses></app-vertical-bar-chart-incomes-expenses>
+<div class="user-charts-container">
+    <div class="container-small">
+        <div class="month-container">
+            <div class="arrow-left" (click)="previousMonth(0)"></div>
+            <div class="month-name"> {{chartDate[0] | date: 'MMMM yyyy'}} </div>
+            <div class="arrow-right" (click)="nextMonth(0)"></div>
+        </div>
+        <app-budget-chart [chartType]="chartType" [chartDate]="chartDate[0]"></app-budget-chart>
+    </div>
+    <div class="container-small">
+        <div class="month-container">
+            <div class="arrow-left" (click)="previousMonth(1)"></div>
+            <div class="month-name"> {{chartDate[1] | date: 'MMMM yyyy'}} </div>
+            <div class="arrow-right" (click)="nextMonth(1)"></div>
+        </div>
+        <app-vertical-bar-chart-incomes-expenses [chartType]="chartType" [chartDate]="chartDate[1]"></app-vertical-bar-chart-incomes-expenses>
+    </div>
+    <div class="container-small">
+        <app-budget-forecasting-chart [chartType]="chartType"></app-budget-forecasting-chart>
+    </div>
 </div>
+<app-footer></app-footer>
 

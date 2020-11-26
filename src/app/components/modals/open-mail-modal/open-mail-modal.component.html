@@ -1,0 +1,9 @@
+<div class="mail-container">
+    <h2 class="title"> {{data.mail.topic}} </h2>
+    <p class="message"> {{data.mail.message}} </p>
+    <div class="buttons-container">
+        <button *ngIf="data.isAdmin == true && data.canAnswer == true" mat-raised-button [mat-dialog-close]="true" class="response-button">Odpowiedz</button>
+        <button mat-raised-button [mat-dialog-close]="false" class="close-button">Zamknij</button>
+    </div>
+
+</div>

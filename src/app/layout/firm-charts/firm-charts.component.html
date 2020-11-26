@@ -1,0 +1,22 @@
+<app-header pageName="Wykresy firmy"></app-header>
+<app-sidenav></app-sidenav>
+<div class="firm-charts-container">
+    <div class="container-small">
+        <div class="month-container">
+            <div class="arrow-left" (click)="previousMonth(0)"></div>
+            <div class="month-name"> {{chartDate[0] | date: 'MMMM yyyy'}} </div>
+            <div class="arrow-right" (click)="nextMonth(0)"></div>
+        </div>
+        <app-budget-chart [chartType]="chartType" [chartDate]="chartDate[0]"></app-budget-chart>
+    </div>
+    <div class="container-small">
+        <div class="month-container">
+            <div class="arrow-left" (click)="previousMonth(1)"></div>
+            <div class="month-name"> {{chartDate[1] | date: 'MMMM yyyy'}} </div>
+            <div class="arrow-right" (click)="nextMonth(1)"></div>
+        </div>
+        <app-vertical-bar-chart-incomes-expenses [chartType]="chartType" [chartDate]="chartDate[1]"></app-vertical-bar-chart-incomes-expenses>
+    </div>
+</div>
+<app-footer></app-footer>
+

@@ -1,6 +1,10 @@
 <div class="login-container">
     <form id="LoginForm" class="login-form" #LoginForm="ngForm">
 
+        <div class="logo">
+            <img src="../../../assets/images/logo-gray.png" alt="logo">
+        </div>
+
         <h2 class="title">Zaloguj się</h2>
 
         <mat-form-field class="form-group">
@@ -16,5 +20,5 @@
         <button mat-raised-button type="button" [disabled]="LoginForm.form.invalid" (click)="loginUser()">Zaloguj się</button>
     
     </form>
-    <a routerLink="/rejestracja"><p>Nie masz jeszcze konta ? Zarejestruj się</p></a>
+    <p class="register-button">Nie masz jeszcze konta ? <a class="underline" routerLink="/rejestracja">Zarejestruj się</a></p>
 </div>

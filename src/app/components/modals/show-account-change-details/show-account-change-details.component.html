@@ -1,0 +1,10 @@
+<div class="show-account-changes-container">
+    <p><span class="title">Tytuł:</span> {{data?.data?.name || 'Brak tytułu'}}</p>
+    <p><span class="title">Ilość pieniędzy:</span> {{data?.data?.money | currency:' '}}zł</p>
+    <p *ngIf="data.data.senderName"><span class="title">Nadawca:</span> {{data?.data?.senderName}}</p>
+    <p *ngIf="!data.data.senderName"><span class="title">Nadawca:</span> Przelew własny</p>
+    <p><span class="title">Data:</span> {{data?.data?.date | date:'shortDate'}}</p>
+    <p><span class="title">Kategoria:</span> {{data?.data?.category?.name || 'Brak'}}</p>
+    <p><span class="title">Status:</span> {{data?.data?.status == 'Waiting'? 'W trakcie' : 'Zaakceptowane'}}</p>
+    <p><span class="title">Wiadomość:</span> {{data?.data?.message || 'Brak wiadomości'}}</p>
+</div>

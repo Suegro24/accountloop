@@ -1,16 +1,20 @@
 <div class="firm-search-container">
     <h2 class="title">Szukaj firmy</h2>
-    <div class="no-firms" *ngIf="activeFirms == 0">
-        <p>Aktualnie nie ma żadnych firm</p>
+    <mat-spinner *ngIf="!ready"></mat-spinner>
+    <div *ngIf="ready">
+        <div class="no-firms" *ngIf="activeFirms == 0">
+            <p>Aktualnie nie ma żadnych firm</p>
+        </div>
+        <!-- <input class="form-control" type="text" name="search" [(ngModel)]="searchedFirm" autocomplete="off" placeholder="Szukaj firmy"> -->
+        <mat-list class="firm-search" *ngFor="let firm of firms">
+            <mat-list-item class="firm-item" *ngIf="firm.isDeleted != true">
+                <mat-icon>business</mat-icon>
+                <p>{{firm.name}} {{firm.address.country}}, {{firm.address.city}}, {{firm.address.street}}</p>
+                <button class="join-firm-button" mat-dialog-close mat-raised-button type="button" (click)="joinFirm(firm._id)"><mat-icon>add</mat-icon></button>
+                <mat-divider></mat-divider>
+            </mat-list-item>
+        </mat-list>
     </div>
-    <!-- <input class="form-control" type="text" name="search" [(ngModel)]="searchedFirm" autocomplete="off" placeholder="Szukaj firmy"> -->
-    <mat-list class="firm-search" *ngFor="let firm of firms">
-        <mat-list-item class="firm-item" *ngIf="firm.isDeleted != true">
-            <mat-icon>business</mat-icon>
-            <p>{{firm.name}} {{firm.address.country}}, {{firm.address.city}}, {{firm.address.street}}</p>
-            <button class="join-firm-button" mat-dialog-close mat-raised-button type="button" (click)="joinFirm(firm._id)"><mat-icon>add</mat-icon></button>
-            <mat-divider></mat-divider>
-        </mat-list-item>
-    </mat-list>
+
 </div>
 

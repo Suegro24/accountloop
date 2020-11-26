@@ -1,13 +1,11 @@
-<app-header></app-header>
+<app-header pageName="Zarządzaj firmą"></app-header>
+<app-sidenav shoouldRefresh="sidenavRefresh"></app-sidenav>
 
 <div class="firm-manage-container">
-    <app-sidenav></app-sidenav>
-    
-    <h2 class="main-title">Ustawienia</h2>
 
     <div class="firm-section">
         <h2 class="title">Dane firmy</h2>
-        <p *ngIf="user.firmStatus == 3" class="edit-button" (click)="editFirmData()" routerLink="/zarzadzaj-firma">Edytuj</p>
+        <p *ngIf="user?.firmStatus == 3" class="edit-button" (click)="editFirmData()" routerLink="/zarzadzaj-firma">Edytuj</p>
 
         <div class="firm-informations-item">
             <p class="label">Nazwa</p>
@@ -54,7 +52,7 @@
                 <div mat-line> {{accountChange.name}} 
                     <span class="align-right" [class]="accountChange.type=='income' ? 'income': 'expense'">{{accountChange.money | currency: ' '}}zł</span>  
                 </div>
-                <div mat-line> {{accountChange.typeName}} 
+                <div mat-line> {{accountChange.category.name}} 
                     <span class="align-right">{{accountChange.date | date:'dd.MM.yyyy'}}</span> 
                 </div>
                 <div class="button-container">

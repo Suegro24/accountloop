@@ -1,16 +1,99 @@
+@import '../../../assets/colors.scss';
+
 .register-container {
-    position: absolute;
-    top: 20%;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 50%;
-    border: 1px solid black;
-    padding: 10px;
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(-45deg, $primary, $secondary);
+    background-size: 200%, 200%;
+    animation: gradient 10s ease infinite;
 
     .register-form {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+        position:absolute;
+        width: 35%;
+        min-width: 500px;
+        right: 50%;
+        top:48%;
+        transform: translate(50%, -50%);
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        background: $background;
+        padding: 20px;
+        border-radius: 3px;
+
+        .logo {
+            margin-bottom: 10px;
+        }
+
+        .form-group {
+            flex-basis: 50%;
+            padding: 20px;
+        }
+
+        .title {
+            position: relative;
+            color: $font-gray;
+            width: 100%;
+            text-align: center;
+            z-index:100;
+
+            &::before {
+                content: '';
+                position: absolute;
+                width: 100%;
+                height: 2px;
+                background: lightgray;
+                top: 50%;
+                left:0;
+                z-index: -1;
+            }
+
+            
+            &::after {
+                content: '';
+                position: absolute;
+                width: 40%;
+                height: 100%;
+                background: $background;
+                top: 50%;
+                left:50%;
+                transform: translate(-50%,-50%);
+                z-index: -1;
+            }
+        }
+
+        .flex-item-full-width {
+            flex-basis: 100%;
+        }
+    }
+
+    .log-in-button {
+        color:white;
+        position: absolute;
+        bottom: 2%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+    }
+
+    .underline {
+        color: white;
+        text-decoration: underline;
+    }
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 0 50%
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0 50%;
     }
 }

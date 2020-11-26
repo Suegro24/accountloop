@@ -5,16 +5,24 @@
     margin-left:200px;
     background: $background;
     min-height: 100vh;
-    
+    padding-top:80px;
+    padding-bottom: 100px;
+
     .filters-container {
         width: 80%;
-        margin: 0 auto;
+        margin: 20px auto 0 auto;
         display:flex;
         flex-direction: column;
         align-items: flex-start;
         background-color: white;
         box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.75);
         padding: 10px;
+
+        .selection-container {
+            width: 90%;
+            display: flex;
+            justify-content: space-between;
+        }
 
         .flex-container {
             display: flex;
@@ -114,6 +122,9 @@
         }
 
         mat-list-item {
+            cursor: pointer;
+            padding: 10px;
+
             div {
                 display: flex;
                 justify-content: space-between;
@@ -138,6 +149,95 @@
 
         .red-line {
             background-color: $warn;
+        }
+    }
+
+    .button-create {
+        background: $success;
+        color: black;
+        position: fixed;
+        bottom: 50px;
+        right: 50px;
+    }
+
+    .grid-container {
+        display: grid;
+        width: 100%;
+        margin: 30px auto 0 auto;
+        grid-template-columns: 1fr 1fr;
+        column-gap: 20px;
+        justify-items: center;
+        align-items: start;
+
+        .goals-ongoing-container,
+        .goals-completed-container {
+            background: white;
+            box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.75);
+            width: 90%;
+            margin: 0 auto;
+
+            mat-list {
+                overflow-y: hidden;
+            }
+
+            .title {
+                text-align: center;
+                padding: 10px;
+                font-size: 20px;
+            }
+
+            .list-item {
+                width: 95%;
+                margin: 0 auto;
+                display: flex;
+                flex-direction: column;
+
+                .add-money-button {
+                    background-color: $success;
+                    margin-left: 10px;
+                    font-size: 20px;
+                }
+
+                .header {
+                    width: 100%;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                }
+
+                .header-small {
+                    display: flex;
+                    align-items: center;
+
+                    span {
+                        margin-left: 5px;
+                    }
+                }
+
+                .progress-bar {
+                    width: 100%;
+                    height: 10px;
+                    border-radius: 6px;
+                }
+            }
+        }
+
+        .goals-completed-container {
+            
+            .list {
+                margin-top: 8px;
+            }
+
+            .header {
+                * {
+                    flex-basis: 33%;
+                    text-align: center;
+                }
+            }
+
+            .complete-icon {
+                text-align: right !important;
+            }
         }
     }
 }

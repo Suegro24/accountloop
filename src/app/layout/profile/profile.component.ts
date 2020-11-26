@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
 import { MatDialog } from '@angular/material/dialog';
 import { EditProfileModalComponent } from 'src/app/components/modals/edit-profile-modal/edit-profile-modal.component';
-
-class ImageSnippet {
-  constructor(public src: string, public file: File) {}
-}
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { ChangePasswordModalComponent } from 'src/app/components/modals/change-password-modal/change-password-modal.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { UnblockUserModalComponent } from 'src/app/components/modals/unblock-user-modal/unblock-user-modal.component';
 
 @Component({
   selector: 'app-profile',
@@ -14,49 +15,45 @@ class ImageSnippet {
 })
 export class ProfileComponent implements OnInit {
 
-  user = JSON.parse(localStorage.getItem('user'));
-  profileImage: ImageSnippet;
+  userId = localStorage.getItem('user');
+  user;
+  image;
+  loggedInUser = true;
+  searchedUserId;
 
-  constructor(private userService: UserService, public dialog: MatDialog) { }
+  constructor(private userService: UserService, public dialog: MatDialog, private route: ActivatedRoute, private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.refresh();
   }
 
   refresh() {
-    this.userService.getUser(this.user._id).subscribe(res => {
-      this.user = res;
-    })
-  }
-
-  addUserPhoto(profilePhoto: any) {
-    const file: File = profilePhoto.files[0];
-    const reader = new FileReader();
-
-    reader.addEventListener('load', (event: any) => {
-      this.profileImage = new ImageSnippet(event.target.result, file);
-      this.user.photo = this.profileImage;
-
-      this.userService.editUser(this.user._id, this.user).subscribe(
-        () => {
-          this.userService.getUser(this.user._id).subscribe(res => {
-            this.user = res;
-          })
-        },
-        (err) => {
-          console.error(err);
-        }
-      )
-
-    })
-    
+    this.route.queryParams.subscribe(params => {
+      if (params.id) {
+        this.loggedInUser = false;
+        this.searchedUserId = params.id;
+      }
+    });
+    if (this.loggedInUser) {
+      this.userService.getUser(this.userId).subscribe(res => {
+        this.user = res;
+      });
+    }
+    else {
+      this.userService.getUser(this.searchedUserId).subscribe(res => {
+        this.user = res;
+      });
+    }
   }
 
   editProfile() {
     const ref = this.dialog.open(EditProfileModalComponent);
     ref.afterClosed().subscribe(() => {
       this.refresh();
-    })
+    });
   }
 
+  updateUserImage() {
+    console.log(this.image);
+  }
 }

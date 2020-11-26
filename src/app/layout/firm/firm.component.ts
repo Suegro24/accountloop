@@ -13,39 +13,42 @@ import { ChartService } from 'src/app/services/chart.service';
 })
 export class FirmComponent implements OnInit {
 
-  chartType="firm";
+  chartType = 'firm';
+  userId = localStorage.getItem('user');
   user;
   firm;
+  sidenavRefresh = false;
 
-  constructor(private userService: UserService, private dialog: MatDialog, private firmService: FirmService, private chartService: ChartService) { }
+  constructor(private userService: UserService, private dialog: MatDialog, private firmService: FirmService,
+              private chartService: ChartService) { }
 
   ngOnInit(): void {
-    this.user = JSON.parse(localStorage.getItem('user'));
     this.refresh();
   }
 
   refresh() {
-    this.userService.getUser(this.user._id).subscribe(res => {
+    this.userService.getUser(this.userId).subscribe(res => {
       this.user = res;
-      
-      this.firmService.getFirm(this.user.firmId).subscribe(res => {
-        this.firm = res;
-      })
-    })
+
+      this.firmService.getFirm(this.user.firmId).subscribe(response => {
+        this.firm = response;
+      });
+    });
   }
 
   searchFirm() {
     const ref = this.dialog.open(FirmSearchModalComponent);
     ref.afterClosed().subscribe(_ => {
       this.refresh();
-    })
+    });
   }
 
   createFirm() {
     const ref = this.dialog.open(FirmCreateModalComponent);
     ref.afterClosed().subscribe(_ => {
       this.refresh();
-    })
+      this.sidenavRefresh = !this.sidenavRefresh;
+    });
   }
 
 }

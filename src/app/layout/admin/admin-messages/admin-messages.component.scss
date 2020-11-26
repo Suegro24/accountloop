@@ -1,0 +1,32 @@
+@import '../../../../assets/colors.scss';
+
+.admin-messages-container {
+    width: calc(100vw-200px);
+    height: 100vh;
+    margin:60px 0 0 200px;
+    background: $background;
+
+    .waiting-messages-list {
+        width: 70%;
+        margin: 10px auto 0 auto;
+
+        .mat-header-cell{
+            text-align: center;
+            justify-content: center;
+        }
+
+        .mat-cell{
+            text-align: center;
+            justify-content: center;
+        }
+
+        .mat-row {
+            cursor: pointer;
+
+            &:hover {
+                background: lightgray;
+            }
+        }
+
+    }
+}

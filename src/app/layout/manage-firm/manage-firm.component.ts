@@ -15,25 +15,26 @@ import { ConfirmLeavingFirmComponent } from 'src/app/components/modals/confirm-l
 export class ManageFirmComponent implements OnInit {
 
   user;
+  userId = localStorage.getItem('user');
   firm;
   accountChangesContainer;
+  sidenavRefresh = false;
 
   constructor(private firmService: FirmService, private userService: UserService, private dialog: MatDialog, private router: Router) { }
 
   ngOnInit(): void {
-    this.user = JSON.parse(localStorage.getItem('user'));
     this.refresh();
   }
 
   refresh() {
-    this.userService.getUser(this.user._id).subscribe(res => {
+    this.userService.getUser(this.userId).subscribe(res => {
       this.user = res;
 
-      this.firmService.getFirm(this.user.firmId).subscribe(res => {
-        this.firm = res;
-        this.accountChangesContainer = [...this.firm.firmBudget.income,...this.firm.firmBudget.expense];
-      })
-    })
+      this.firmService.getFirm(this.user.firmId).subscribe(response => {
+        this.firm = response;
+        this.accountChangesContainer = [...this.firm.firmBudget.income, ...this.firm.firmBudget.expense];
+      });
+    });
   }
 
   acceptUser(id) {
@@ -41,7 +42,7 @@ export class ManageFirmComponent implements OnInit {
       this.refresh();
     });
   }
-  
+
   discardUser(id) {
     this.userService.discardUserToFirm(id).subscribe(() => {
       this.refresh();
@@ -50,7 +51,6 @@ export class ManageFirmComponent implements OnInit {
 
   acceptBudgetChange(id) {
     this.firmService.acceptBudgetChange(this.firm._id, id).subscribe(() => {
-      console.log('asd');
       this.refresh();
     });
   }
@@ -70,7 +70,7 @@ export class ManageFirmComponent implements OnInit {
     });
     ref.afterClosed().subscribe(() => {
       this.refresh();
-    })
+    });
   }
 
   deleteEmployee(id) {
@@ -81,29 +81,29 @@ export class ManageFirmComponent implements OnInit {
 
   deleteFirm() {
     this.firmService.deleteFirm(this.firm._id).subscribe();
-    this.router.navigate(['/firma']);
+    this.router.navigate(['/przeglad']);
+    this.sidenavRefresh = true;
   }
 
   leaveFirm() {
     let amountOfOwners = 0;
     this.firm.users.forEach(user => {
-      if (user.firmStatus == 3) amountOfOwners++;
+      if (user.firmStatus === 3) { amountOfOwners++; }
     });
-    if (amountOfOwners == 1 && this.user.firmStatus == 3) {
-      const ref = this.dialog.open(ConfirmLeavingFirmComponent)
+    if (amountOfOwners === 1 && this.user.firmStatus === 3) {
+      const ref = this.dialog.open(ConfirmLeavingFirmComponent);
       ref.afterClosed().subscribe(res => {
-        if (res == true) {
+        if (res === true) {
           this.firmService.deleteFirm(this.firm._id).subscribe();
           this.router.navigate(['/firma']);
         }
-      })
+      });
     }
     else {
       this.userService.leaveFirm(this.user._id).subscribe();
       this.router.navigate(['/firma']);
     }
-   
-    
+    this.sidenavRefresh = true;
   }
 
   editFirmData() {
@@ -114,7 +114,7 @@ export class ManageFirmComponent implements OnInit {
     });
     ref.afterClosed().subscribe( () => {
       this.refresh();
-    })
+    });
   }
 
 }

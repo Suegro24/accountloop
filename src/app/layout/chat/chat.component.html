@@ -1,0 +1,20 @@
+<app-header pageName="Czat" ></app-header>
+<app-sidenav></app-sidenav>
+<div class="chat-container">
+    <h2 class="page-title">Czat - {{firm?.name}}</h2>
+
+    <div class="chatroom">
+        <ul class="chat-list">
+            <li class="chat-list-item" *ngFor="let chatMessage of webSocketService.chatMessages">
+                <div class="username"><strong>{{chatMessage.user}}:</strong></div>
+                <div class="message">{{chatMessage.message}}</div>
+            </li>
+        </ul>
+        <form class="chat-form" (ngSubmit)="sendMessage(sendForm)" #sendForm="ngForm">
+            <input class="message" type="text" name="message" id="message" placeholder="Napisz wiadomość..." ngModel required>
+            <button mat-raised-button class="send-button" type="submit"><mat-icon>send</mat-icon></button>
+        </form>
+    </div>
+
+</div>
+<app-footer></app-footer>

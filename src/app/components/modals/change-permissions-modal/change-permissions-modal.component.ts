@@ -11,7 +11,7 @@ import { User } from 'src/app/models/user';
 export class ChangePermissionsModalComponent implements OnInit {
 
   user;
-  changePermissionsModel = new User('','','','','','','',null,'',null,null,'',0,[],0);
+  changePermissionsModel = new User('', '', '', '', '', '', '', null, '', null, null, '', 0, null, [], 0, null, null, null, [], null);
   permissions: number;
 
   constructor(private userService: UserService, @Inject(MAT_DIALOG_DATA) public data: any ) { }
@@ -19,16 +19,16 @@ export class ChangePermissionsModalComponent implements OnInit {
   ngOnInit(): void {
     this.userService.getUser(this.data.userId).subscribe(res => {
       this.user = res;
-    })
+    });
 
     this.userService.getUser(this.data.employeeId).subscribe(res => {
       this.changePermissionsModel = res;
       this.permissions = res.firmStatus;
-    })
+    });
   }
 
   changePermissions() {
-    this.userService.changeUserPermissions(this.data.employeeId, this.permissions).subscribe()
+    this.userService.changeUserPermissions(this.data.employeeId, this.permissions).subscribe();
   }
 
 }

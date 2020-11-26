@@ -1,0 +1,27 @@
+@import '../../../../assets/colors.scss';
+
+.user-list-container {
+    background: $background;
+    width: calc(100%-200px);
+    margin: 60px 0 0 200px;
+    padding: 20px 0 100px 0;
+    height: 100vh;
+
+    .user-list {
+        width: 30%;
+        margin: 0 auto;
+        
+        .user-list-item {
+            position: relative;
+            width: 100%;
+            background: white;
+            
+            .menu {
+                position: absolute;
+                right: 20px;
+                top:50%;
+                transform: translateY(-50%);
+            }
+        }
+    }
+}

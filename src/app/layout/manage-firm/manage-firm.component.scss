@@ -1,21 +1,19 @@
+@import '../../../assets/colors.scss';
+
 .firm-manage-container {
-
-    width: 40%;
-    margin:0 auto 100px auto;
-
-    .main-title {
-        margin:10px 0 30px 0;
-        text-align: center;
-        font-size: 24px;
-    }
+    width: calc(100%-200px);
+    margin:60px 0 0 200px;
+    padding: 20px 0 40px 0;
+    background-color: $background;
 
     .firm-section {
-
         border: 1px solid black;
         border-radius: 10px;
         padding: 10px;
-        margin-top: 30px;
+        margin-top: 80px;
         position: relative;
+        width: 40%;
+        margin: 20px auto;
 
         .edit-button {
             position: absolute;
@@ -70,6 +68,10 @@
         }
 
         .attempting-budget-changes {
+
+            .income{
+                color: black;
+            }
             
             mat-list-item {
                 position: relative;
@@ -100,6 +102,7 @@
 
         .users-manage {
             margin-top: 10px;
+            background-color: $background;
 
             mat-card-actions {
                 text-align: right;
@@ -109,9 +112,7 @@
     }
 
     .delete {
-
         text-align: center;
-        
     }
 }
 

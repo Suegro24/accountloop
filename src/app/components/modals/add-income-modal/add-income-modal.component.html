@@ -1,9 +1,9 @@
 <form class="income-form" #IncomeForm="ngForm">
-    <h2 class="title">Dochów</h2>
+    <h2 class="title">Dochód</h2>
 
     <mat-form-field class="form-group">
         <mat-label>Nazwa</mat-label>
-        <input matInput class="form-control" type="text" name="name" [(ngModel)]="incomeModel.name" #name="ngModel" required>
+        <input (change)="chooseCategory()" matInput class="form-control" type="text" name="name" [(ngModel)]="incomeModel.name" #name="ngModel" required>
         <!-- <div *ngIf="name.errors && name.touched">
             <p class="text--warn" *ngIf="name.errors.required">Imie jest wymagane</p>
             <p class="text--warn" *ngIf="name.errors.pattern">Imie nie może mieć więcej niż 20 znaków</p>
@@ -19,21 +19,25 @@
         </div> -->
     </mat-form-field>
 
-    <div class="form-group">
-        <input class="form-control" type="date" name="dateOfBirth" value="2020-06-11" [(ngModel)]="incomeModel.date" #dateOfBirth="ngModel" required>
-        <!-- <div *ngIf="name.errors && name.touched">
-            <p class="text--warn" *ngIf="name.errors.required">Imie jest wymagane</p>
-            <p class="text--warn" *ngIf="name.errors.pattern">Imie nie może mieć więcej niż 20 znaków</p>
-        </div> -->
-    </div>
+    <mat-form-field class="form-group" appearance="fill">
+        <mat-label>Data</mat-label>
+        <input matInput #date="ngModel" name="date" [matDatepicker]="picker" [(ngModel)]="incomeModel.date" required>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field *ngIf="data.budgetType!='firm'" class="form-group">
+        <mat-label>Cel</mat-label>
+        <mat-select [(value)]="selectedBudgetGoal" class="select" name="budgetGoal" [(ngModel)]="selectedBudgetGoal">
+            <mat-option *ngFor="let goal of budgetGoals" [value]="goal"> {{goal.name}} </mat-option>
+        </mat-select>
+    </mat-form-field>
 
     <mat-form-field class="form-group">
         <mat-label>Rodzaj</mat-label>
-        <input matInput class="form-control" type="text" name="type" [(ngModel)]="incomeModel.typeName" #type="ngModel" required>
-        <!-- <div *ngIf="name.errors && name.touched">
-            <p class="text--warn" *ngIf="name.errors.required">Imie jest wymagane</p>
-            <p class="text--warn" *ngIf="name.errors.pattern">Imie nie może mieć więcej niż 20 znaków</p>
-        </div> -->
+        <mat-select [(value)]="incomeModel.category" class="select" name="category" [(ngModel)]="incomeModel.category" required>
+            <mat-option *ngFor="let category of categories" [value]="category"> {{category.name}} </mat-option>
+        </mat-select>
     </mat-form-field>
 
     <button mat-button class="btn-success" type="button" mat-dialog-close [disabled]="IncomeForm.form.invalid" (click)="addIncome()">Dodaj dochód</button>

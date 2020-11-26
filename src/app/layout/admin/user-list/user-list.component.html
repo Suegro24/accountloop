@@ -1,0 +1,37 @@
+<app-header pageName="Admin - lista użytkowników"></app-header>
+<app-sidenav isAdminLoggedIn="true"></app-sidenav>
+
+<div class="user-list-container">
+    <mat-tab-group mat-align-tabs="center">
+        <mat-tab label="Użytkownicy">
+            <mat-list class="user-list" *ngFor="let user of users">
+                <mat-list-item class="user-list-item"> 
+                    <span> {{user.name}} {{user.surname}} </span>
+                    <div class="menu">
+                        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="icon menu">
+                            <mat-icon class="more-icon">more_vert</mat-icon>
+                        </button>
+                        <mat-menu #menu="matMenu">
+                            <button mat-menu-item (click)="restartPassword(user)">
+                                <mat-icon>restore</mat-icon>
+                                <span>Zresetuj hasło</span>
+                            </button>
+                            <button *ngIf="!user.isUserBlocked" mat-menu-item (click)="blockUser(user)">
+                                <mat-icon>block</mat-icon>
+                                <span>Zablokuj</span>
+                            </button>
+                            <button *ngIf="user.isUserBlocked" mat-menu-item (click)="unblockUser(user)">
+                                <mat-icon>lock_open</mat-icon>
+                                <span>Odblokuj</span>
+                            </button>
+                        </mat-menu> 
+                    </div>
+                </mat-list-item>
+            </mat-list>
+        </mat-tab>
+    </mat-tab-group>
+</div>
+
+asd
+
+<app-footer></app-footer>
