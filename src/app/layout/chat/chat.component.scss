@@ -21,18 +21,41 @@
         border-radius: 5px;
         position: relative;
 
+        .chat-closed-information {
+            border: 2px solid red;
+            background-color: #ee4b4b;
+            text-align: center;
+            padding: 5px;
+            cursor: pointer;
+            opacity: 0.8;
+            transition: transform 0.5s;
+
+            &:hover {
+                opacity: 1;
+            }
+        }
+
         .chat-list {
             list-style: none;
             display: flex;
             flex-direction: column;
             padding-top: 20px;
+            height: 80%;
+            overflow-y: auto;
 
             .chat-list-item {
                 display: flex;
                 padding: 5px 20px;
+                width: 100%;
 
                 .username {
                     margin-right: 10px;
+                }
+
+                .message {
+                    width: 70%;
+                    margin-left: 10px;
+                    word-wrap: break-word !important;
                 }
             }
         }
@@ -65,6 +88,10 @@
                 min-width: 60px;
                 cursor: pointer;
                 background-color: $primary;
+
+                &:disabled {
+                    cursor: default;
+                }
             }
         }
     }

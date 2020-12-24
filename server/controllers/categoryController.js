@@ -30,7 +30,6 @@ router.get('/choose-category/:name', function(req, res) {
         if (error) console.error(error) 
         else {
             let words = req.params.name.toLowerCase().split(' ');
-            // sprawdzanie czy słowo występuję w bazie danych w kategoriach
             words.map(word => {
                 categories.map(category => {
                     if (category.matches.length == 0) category.matches.push({name: word, amount: 1})
@@ -54,7 +53,6 @@ router.get('/choose-category/:name', function(req, res) {
                 category.save();
             })
 
-           // (...)
             let numberOfAppearancesOfTheCategories = Array(categories.length).fill(0);
             categories.map((category,index) => {
                 category.matches.map(match => {

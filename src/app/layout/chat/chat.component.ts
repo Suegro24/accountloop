@@ -15,6 +15,7 @@ export class ChatComponent implements OnInit, OnDestroy {
   userId = localStorage.getItem('user');
   user;
   firm;
+  chatStatus = true;
 
   constructor(private userService: UserService, private firmService: FirmService, public webSocketService: WebSocketService) { }
 
@@ -26,9 +27,21 @@ export class ChatComponent implements OnInit, OnDestroy {
         this.firm = response;
       });
 
-      this.webSocketService.openWebSocket();
+      this.openWebSocket();
 
+      this.webSocketService.event$.subscribe(data => {
+        this.changeChatStatus(data);
+      });
     });
+  }
+
+  openWebSocket() {
+    this.webSocketService.openWebSocket();
+  }
+
+  changeChatStatus(status: boolean) {
+    this.chatStatus = status;
+    console.log(this.chatStatus);
   }
 
   sendMessage(sendForm: NgForm) {

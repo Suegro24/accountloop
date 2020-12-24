@@ -10,7 +10,6 @@ const Position = require('../models/position');
 const Firm = require('../models/firm');
 const Settings = require('../models/settings');
 const BudgetGoals = require('../models/budgetGoals');
-const Upload = require('../middleware/upload');
 const { Mongoose } = require('mongoose');
 
 // router.get('/profile-image', (req, res) => { 
@@ -85,7 +84,7 @@ router.get('/', (req, res) => {
             users.forEach(user => {
                 if (user.budget !== undefined || user.budget !== null) user.budget.money = calculateMoney(user);
             });
-            res.json(users);
+            res.status(200).send(users);
         } 
     })
 });
@@ -96,7 +95,9 @@ router.get('/:id', (req, res) => {
         if (error) console.error(error);
         else {
             user.budget.money = calculateMoney(user);
-            user.firmBudget.money = calculateUserFirmMoney(user);
+            if (user.firmBudget) {
+                user.firmBudget.money = calculateUserFirmMoney(user);
+            }
             res.send(user);
         }
     })
@@ -606,4 +607,9 @@ function verifyToken(req, res, next) {
     next()
 }
 
-module.exports = router;
+module.exports = {
+    router: router,
+    calculateMoney,
+    calculateUserFirmMoney,
+    verifyToken
+}

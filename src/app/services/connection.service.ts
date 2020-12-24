@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ConnectionService {
 
-  public url = "http://localhost:8000";
+  public url = `http://localhost:8000`;
 
   constructor(public http: HttpClient) { }
 }

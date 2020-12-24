@@ -4,7 +4,8 @@
     <h2 class="page-title">Czat - {{firm?.name}}</h2>
 
     <div class="chatroom">
-        <ul class="chat-list">
+        <div *ngIf="!chatStatus" role="button" (click)="openWebSocket()" class="chat-closed-information">Czat nie jest załadowany poprawnie, kliknik tutaj, aby załadować ponownie</div>
+        <ul id="chatList" class="chat-list">
             <li class="chat-list-item" *ngFor="let chatMessage of webSocketService.chatMessages">
                 <div class="username"><strong>{{chatMessage.user}}:</strong></div>
                 <div class="message">{{chatMessage.message}}</div>
@@ -12,7 +13,7 @@
         </ul>
         <form class="chat-form" (ngSubmit)="sendMessage(sendForm)" #sendForm="ngForm">
             <input class="message" type="text" name="message" id="message" placeholder="Napisz wiadomość..." ngModel required>
-            <button mat-raised-button class="send-button" type="submit"><mat-icon>send</mat-icon></button>
+            <button [disabled]="!chatStatus" mat-raised-button class="send-button" type="submit"><mat-icon>send</mat-icon></button>
         </form>
     </div>
 

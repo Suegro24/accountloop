@@ -211,7 +211,7 @@ const Material = [
     HttpClientModule,
     NgxChartsModule
   ],
-  providers: [AuthGuard, RoleGuardService, EventEmitterService],
+  providers: [AuthGuard, RoleGuardService, EventEmitterService, {provide: Window, useValue: window}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
