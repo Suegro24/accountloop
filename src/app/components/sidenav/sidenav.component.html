@@ -94,8 +94,8 @@
     </mat-sidenav>
     <mat-sidenav-content>
         <mat-toolbar>
-            <button mat-flat-button type="button" aria-label="Toggle sidenav" (click)="drawer.toggle()" *ngIf="(isHandset | async)!.matches">
-                <mat-icon>keyboard_arrow_right</mat-icon>
+            <button class="menu-button" mat-flat-button type="button" aria-label="Toggle sidenav" (click)="drawer.toggle()" *ngIf="(isHandset | async)!.matches">
+                <mat-icon class="arrow" >keyboard_arrow_right</mat-icon>
             </button>
         </mat-toolbar>
         <router-outlet></router-outlet>

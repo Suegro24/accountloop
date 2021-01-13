@@ -6,6 +6,11 @@
     padding: 20px 0 40px 0;
     background-color: $background;
 
+    @media (max-width: 600px) {
+        margin-left: 0;
+        width: 100vw;
+    }
+
     .firm-section {
         border: 1px solid black;
         border-radius: 10px;

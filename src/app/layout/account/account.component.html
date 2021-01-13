@@ -3,9 +3,9 @@
 
 <div class="account-container">
     <mat-tab-group mat-align-tabs="center">
-        <mat-tab label="Historia konta">
+        <mat-tab class="account-history" label="Historia konta">
             <div class="filters-container">
-                <div class="flex-container">
+                <div class="flex-container inputs">
                     <mat-form-field class="form-group">
                         <mat-label>Kategoria</mat-label>
                         <mat-select [formControl]="selectedCategories" multiple>
@@ -20,8 +20,8 @@
                 </div>
                 <div class="selection-container">
                     <div class="checkboxes">
-                        <mat-checkbox color="primary" [(ngModel)]="checkboxes.expenses" selected>Expenses</mat-checkbox>
-                        <mat-checkbox color="primary" [(ngModel)]="checkboxes.incomes" selected>Incomes</mat-checkbox>
+                        <mat-checkbox color="primary" [(ngModel)]="checkboxes.expenses" selected>Wydatki</mat-checkbox>
+                        <mat-checkbox color="primary" [(ngModel)]="checkboxes.incomes" selected>Przychody</mat-checkbox>
                     </div>
     
                     <mat-chip-list class="chips-container" #categoryChips aria-label="Selected categories">

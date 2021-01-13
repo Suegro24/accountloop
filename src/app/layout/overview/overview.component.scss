@@ -11,6 +11,15 @@
     justify-items: center;
     padding-top: 100px;
 
+    @media (max-width: 1400px) {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    @media (max-width: 600px) {
+        width: 100vw;
+        margin-left: 0;
+    }
+
     app-sidenav {
         position: fixed;
         left:0;

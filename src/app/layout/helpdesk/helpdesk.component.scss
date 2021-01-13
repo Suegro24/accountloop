@@ -7,6 +7,11 @@
     background: $background;
     margin-top: 60px;
 
+    @media (max-width: 600px) {
+        margin-left: 0;
+        width: 100vw;
+    }
+
     .tabs-container {
         width: 70%;
         margin:0 auto;

@@ -12,6 +12,11 @@
     justify-items: center;
     padding-top: 100px;
 
+    @media (max-width: 600px) {
+        margin-left: 0;
+        width: 100vw;
+    }
+
     app-sidenav {
         position: fixed;
         left:0;

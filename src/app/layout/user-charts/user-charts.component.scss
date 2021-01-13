@@ -12,6 +12,11 @@
     min-height: 100vh;
     padding: 100px 50px 50px 50px;
 
+    @media (max-width: 600px) {
+        margin-left: 0;
+        width: 100vw;
+    }
+
     .container-small {
         
         .month-container {

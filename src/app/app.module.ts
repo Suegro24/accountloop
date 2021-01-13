@@ -62,7 +62,6 @@ import { VerticalBarChartIncomesExpensesComponent } from './components/vertical-
 import { MoneyTransferComponent } from './layout/money-transfer/money-transfer.component';
 import { MoneyTransferPipePipe } from './components/pipes/money-transfer-pipe/money-transfer-pipe.pipe';
 import { SendMoneyDialogComponent } from './components/modals/send-money-dialog/send-money-dialog.component';
-import { HomeComponent } from './layout/home/home.component';
 import { AuthGuard } from './guards/auth.guard';
 import { FirmChartsComponent } from './layout/firm-charts/firm-charts.component';
 import { ChatComponent } from './layout/chat/chat.component';
@@ -175,7 +174,6 @@ const Material = [
     MoneyTransferComponent,
     MoneyTransferPipePipe,
     SendMoneyDialogComponent,
-    HomeComponent,
     FirmChartsComponent,
     ChatComponent,
     SettingsComponent,

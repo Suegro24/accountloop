@@ -7,6 +7,11 @@
     width:calc(100%-200px);
     margin-left:200px;
 
+    @media (max-width: 600px) {
+        margin-left: 0;
+        width: 100vw;
+    }
+
     .no-firm {
         border: 1px solid black;
         border-radius: 5px;
@@ -44,11 +49,9 @@
     }
 
     .firm {
-        
         position: relative;
 
         .firm-header {
-
             display: flex;
             justify-content: center;
             align-items: center;
@@ -88,6 +91,10 @@
                 gap: 100px;
                 justify-items: center;
                 padding-top: 50px;
+
+                @media (max-width: 1000px) {
+                    grid-template-columns: 1fr;
+                }
             }
         }
 
