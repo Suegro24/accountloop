@@ -1,6 +1,6 @@
 <mat-sidenav-container>
     <mat-sidenav #drawer [ngClass]="{hidden: !(isHandset | async)!.matches}" fixedInViewport="false" 
-    [attr.role]="isHandset ? 'dialog' : 'navigation'" [mode]="(isHandset | async)!.matches ? 'over' : 'side'"
+    [attr.role]="isHandset ? 'navigation' : 'navigation'" [mode]="(isHandset | async)!.matches ? 'side' : 'side'"
     [opened]="!(isHandset | async)!.matches">
         <mat-nav-list *ngIf="!isAdminLoggedIn">
 
